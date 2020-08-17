@@ -1,0 +1,24 @@
+* {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+h1 {
+    text-align: center;
+}
+p {
+    margin-left: 75x;
+}
+h2, h3 {
+    margin-left: 250px;
+    color: blue;
+}
+.start {   
+    text-decoration: underline;
+    animation-name: starter;
+    animation-duration: 10s;
+    color: red;
+}
+@keyframes starter {
+    from {color: red;}
+    to {color: green;}
+}
