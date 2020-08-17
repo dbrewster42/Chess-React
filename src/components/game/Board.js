@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import "./Board.css"
-import DataService from '../service/DataService';
+import DataService from '../../service/DataService';
 
 const Board = () => {
+    const [data, setData] = useState([]);
     /*let board = new Array(8);
     // let [i, setI] = useState(0);
 
@@ -33,12 +34,14 @@ const Board = () => {
     */
     function Row(i){
         const newRow = [];
+        let count = i * 8;
         for (let j = 0; j<7; j++){
-            if ((i + j )% 2 == 1){
+            if ((i + j) % 2 == 1){
                 newRow.push(<div key={i * 10 + j} className="squares g"></div>)
             }else {
                 newRow.push(<div key={i * 10 + j} className="squares y"></div>)
             }
+            count++;
             
         }
         return <div className="rows">{newRow}</div>;
@@ -54,8 +57,18 @@ const Board = () => {
 
     const showBoard = () => {
         DataService.getBoard()
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res.data);
+                // let newData = res.data;
+                // setData(newData);
+            })
             .catch(error => console.log(error))
+    }
+
+    const checkData = () => {
+        console.log(data);
+        console.log(data[0])
+        console.log(data[0].name)
     }
 //    const showTheBoard = () => {
 //         DataService.getBoard()
@@ -74,7 +87,7 @@ const Board = () => {
 //    }
     return ( 
         <div id="main">
-            <h1 onClick={showBoard}>Start</h1><br />
+            <h1 onClick={checkData}>Start</h1><br />
             {showBoard()}
             {Row(0)}
             {Row(1)}
