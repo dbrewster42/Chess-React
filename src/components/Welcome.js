@@ -15,8 +15,8 @@ const Welcome = () => {
         <div id="welcome">
             {/* <h1>Would You Like To Play A Game?</h1> */}
             {/* <p>If you are ready to player, click below</p> */}
-            <h1 class="start" onClick={toggleForm}>Click Here to Begin</h1>
-            <h1 class="start" onClick={toggleForm}>{">>>>>>>>>"} Start A Game {"<<<<<<<<<<"} </h1>
+            <h1 className="start" onClick={toggleForm}>Click Here to Begin</h1>
+            <h1 className="start" onClick={toggleForm}>{">>>>>>>>>"} Start A Game {"<<<<<<<<<<"} </h1>
             {showsForm ? 
             <PlayerForm />
             : 
