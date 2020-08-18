@@ -1,8 +1,8 @@
 
 import axios from 'axios'
 
-
-const url = 'http://localhost:8080';
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = 'http://localhost:8080/game';
 // const DataService = () => {
 class DataService {
     

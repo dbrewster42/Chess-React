@@ -2,42 +2,27 @@ import React, { useState } from 'react';
 import "./Board.css"
 import DataService from '../../service/DataService';
 
+function importAll(r) {
+    let images = {};
+    r.keys().forEach((item, index) => {
+      images[item.replace("./", "")] = r(item);
+    });
+    // console.log(images);
+    return images;
+  }
+
 const Board = () => {
     const [data, setData] = useState([]);
-    /*let board = new Array(8);
-    // let [i, setI] = useState(0);
+    const images = importAll(require.context("../../public/pics", false, /\.(jp?g)$/));
 
-    const gameboard = () => {
-        for (let i = 0; i < 8; i++){
-            board[i] = new Array(8)
-            for (let j = 0; j < 8; j++){
-                if (i % 2 == 0){
-                    if (j % 2 == 0){
-                        return <div key={i * 10 +j} className="squares g" />
-                    }
-                    else {
-                        return <div key={i * 10 +j} className="squares y" />
-                    }
-                }
-                else {
-                    if (j % 2 == 1){
-                        return <div key={i * 10 +j} className="squares g" />
-                    }
-                    else {
-                        return <div key={i * 10 +j} className="squares y" />
-                    }
-                }                    
-                
-            }
-        }
-    }
-    */
     function Row(i){
         const newRow = [];
         let count = i * 8;
         for (let j = 0; j<7; j++){
             if ((i + j) % 2 == 1){
-                newRow.push(<div key={i * 10 + j} className="squares g"></div>)
+                newRow.push(<div key={i * 10 + j} className="squares g"><img src={images[data.name]}
+                className="icons"
+                alt="chess piece" /></div>)
             }else {
                 newRow.push(<div key={i * 10 + j} className="squares y"></div>)
             }
@@ -59,8 +44,8 @@ const Board = () => {
         DataService.getBoard()
             .then(res => {
                 console.log(res.data);
-                // let newData = res.data;
-                // setData(newData);
+                let newData = res.data;
+                setData(newData);
             })
             .catch(error => console.log(error))
     }

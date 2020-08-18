@@ -1,24 +1,29 @@
 import React from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
 import Header from "./components/Header"
 import Welcome from "./components/Welcome"
 import Board from "./components/game/Board"
-// import DataService from './service/DataService';
 
 function App() {
 
-  // const showBoard = () => {
-  //   DataService.getBoard()
-  //       .then(res => console.log(res))
-  //       .catch(error => console.log(error))
-  // }
-
   return (
-    <div className="App">
-      {/* <Header />
-      <Welcome /> */}
-      <Board />
-    </div>
+    <Router>
+      <Switch>
+        <Header />
+        <Route exact path="/">
+          <Welcome />
+        </Route>
+        <Route exact path="/game">
+          <Board />
+        </Route>      
+      </Switch>
+    </Router>
+    
   );
 }
 
