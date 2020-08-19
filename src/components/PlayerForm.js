@@ -1,25 +1,40 @@
 import React, {useState} from 'react';
 import axios from 'axios'
 import "./PF.css"
+import DataService from '../service/DataService';
 
-const PlayerForm = () => {
+const PlayerForm = props => {
+    // console.log("PF", props)
     const [name, setName] = useState("Your Name");
     const [player, setPlayer] = useState(1);
-    const url = "http://localhost:8080"; 
+    const url = "http://localhost:8080/game"; 
 
     const handleChange = e => {               
         setName(e.target.value);
     }
 
+    const addPlayer = name => {
+        // axios.post(url, name)
+        DataService.addPlayer()
+        .then(res => {
+            console.log("added player", res);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     const createPlayer = (e) => {
         e.preventDefault();        
-        axios.post(url, name);
         console.log(e.target.value);
-        console.log(e.target.name.value);
-        setName("");
-        if (player == 2){
+        console.log(e.target.name.value);   
+        addPlayer(e.target.name.value);
+        if (player === 2){
+
             window.location = '/game';
+            props.showBoard();
         }
+        setName("");
         setPlayer(player + 1);
     }
 

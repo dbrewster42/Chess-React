@@ -1,10 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 // import { Link } from "react-router-dom";
 import PlayerForm from "./PlayerForm"
 import "./Welcome.css"
 
-const Welcome = () => {
-    
+const Welcome = props => {
+    // console.log("Welcome to the ", props)
     const [showsForm, setShowsForm] = useState(false);
 
     const toggleForm = e => {
@@ -18,7 +18,7 @@ const Welcome = () => {
             <h1 className="start" onClick={toggleForm}>Click Here to Begin</h1>
             <h1 className="start" onClick={toggleForm}>{">>>>>>>>>"} Start A Game {"<<<<<<<<<<"} </h1>
             {showsForm ? 
-            <PlayerForm />
+            <PlayerForm showBoard={() => props.showBoard} />
             : 
             <i></i>
             }
@@ -31,6 +31,12 @@ const Welcome = () => {
             <p>To select a piece, you first choose it's vertical location, 0-7. Then select it's horizontal direction, also 0-7. <br />
                 You then enter this 2 digit number to select the piece and you choose the piece's new location in the same way. The
                 program will check to ensure that it is a valid movement and it will direct you to rechoose if it isn't.
+            </p>
+            <p>Click on the piece you wish to move, an "Unselect" button will pop up and you can click on that to choose a different piece or, if you are not
+                making a special move, select the location you wish to move your piece to. If your move is not a valid chess move, you will be prompted to try again.
+                The only exceptions are with Castles and en Passant. If you wish to castle, select the Rook you wish to use and then click on the Special Move button.
+                If you wish to use en Passant, select the pawn you wish to use and then click on the Special Move button.
+                See below for the valid conditions to make these special moves.
             </p>
 
             <h2>General Chess Rules</h2>
@@ -85,11 +91,11 @@ const Welcome = () => {
                 <li>333- Castles (the proper Rook must be selected)</li>
                 <li>111- En Passant (the proper Pawn must be selected)</li>
             </ul>
-            <h3>Special Moves</h3>
+            <h2>Special Moves</h2>
             <ul>
-                <li>En Passant</li>
-                <li>Pawn Promotion</li>
-                <li>Castle</li>
+                <li><strong>En Passant</strong> may only be used if the capturing pawn must be on its fifth rank. The threatened pawn must have moved two squares from its starting square, and be on an adjacent file.</li>                
+                <li><strong>Castle</strong> may only be used if the king has never moved, the rook involved has never moved, the squares between the king and the rook involved are unoccupied, the king is not in check, and the king does not cross over or end on a square attacked by an enemy piece.</li>
+                <li><strong>Pawn Promotion</strong> is when a pawn makes it to the other side of the board. Upon reaching the back row, the pawn becomes a queen</li>
                 <li>Undo</li>
             </ul>
         </div>
