@@ -34,7 +34,7 @@ function App() {
       <Switch>
         
 
-        <Route exact path="/welcome">
+        <Route exact path="/">
           <Welcome showBoard={() => showBoard} />
         </Route>
 
