@@ -9,8 +9,16 @@ class DataService {
         return axios.get(`${url}`);
     }
 
-    addPlayer(name){
-        return axios.post(url, name)
+    // getStatus(){
+    //     return axios.get(`${url}/status`)
+    // }
+
+    createPlayers(body){
+        return axios.post(`${url}/players`, body);
+    }
+
+    makeMove(move){
+        return axios.post(`${url}`, move)
     }
    
 }

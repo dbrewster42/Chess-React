@@ -1,45 +1,56 @@
 import React, {useState} from 'react';
-import axios from 'axios'
 import "./PF.css"
+import { withRouter } from 'react-router-dom';
 import DataService from '../service/DataService';
 
 const PlayerForm = props => {
-    // console.log("PF", props)
+    //console.log("PF", props)
     const [name, setName] = useState("Your Name");
+    const [names] = useState([])
     const [player, setPlayer] = useState(1);
-    const url = "http://localhost:8080/game"; 
 
     const handleChange = e => {               
         setName(e.target.value);
-    }
+    }   
 
-    const addPlayer = name => {
+    const addPlayers = body => {
         // axios.post(url, name)
-        DataService.addPlayer()
+        console.log(body)
+        DataService.createPlayers(body)
         .then(res => {
             console.log("added player", res);
+            props.setTheBoard(res.data);
+            // let newData = res.data;
+            // setData([...newData]);
+            //props.history.push('/game')
         })
         .catch(err => {
             console.log(err)
         })
     }
 
-    const createPlayer = (e) => {
-        e.preventDefault();        
-        console.log(e.target.value);
-        console.log(e.target.name.value);   
-        addPlayer(e.target.name.value);
+    const makePlayer = (e) => {
+        e.preventDefault(); 
+        console.log(e.target.name.value);
+        names.push(e.target.name.value);        
         if (player === 2){
-
-            window.location = '/game';
-            props.showBoard();
+            const body = {                
+                name1: names[0], 
+                name2: names[1]
+            }
+            addPlayers(body);
+            setPlayer(0);
+            //props.history.push('/game')
+            // window.location = '/game';
+            //props.showBoard();
         }
         setName("");
         setPlayer(player + 1);
     }
+    
 
     return ( 
-        <form onSubmit={createPlayer}>
+        <form onSubmit={makePlayer}>
             Player {player}, Please Enter Your Name <br></br>
             <input type="text" name="name" onChange={handleChange} value={name} /><br></br>
             <input type="submit" value="Submit" />
@@ -47,4 +58,4 @@ const PlayerForm = props => {
      );
 }
  
-export default PlayerForm;
+export default withRouter(PlayerForm);

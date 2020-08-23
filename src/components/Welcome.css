@@ -2,14 +2,28 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
+#body {
+    display: flex;
+}
+#left {
+    width: 45%;
+    margin: 2.5%;
+    display: inline-block;
+}
+#right {
+    width: 45%;
+    display: inline-block;
+}
+
 h1 {
     text-align: center;
 }
 p {
     margin-left: 75x;
 }
-h2, h3 {
-    margin-left: 250px;
+h2, h3 {   
+    margin-left: 180px;
     color: blue;
 }
 .start {   
