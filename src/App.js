@@ -6,7 +6,7 @@ import {
   Switch
 } from "react-router-dom";
 import Header from "./components/Header"
-import Welcome from "./components/Welcome"
+import Welcome from "./components/welcome/Welcome"
 import Board from "./components/game/Board"
 
 function App(props) {
@@ -29,9 +29,6 @@ function App(props) {
     console.log("app", data);
     setData([...data]);
   }
-  // useEffect (() => {
-  //   setTheBoard();
-  // },[]); 
 
   return (
     <Router>
@@ -46,7 +43,7 @@ function App(props) {
         {/* <Route exact path="/game">
           <Board data={data} />
         </Route>  */}
-        <Route exact path="/game" render={() => <Board data={data} /> } />
+        <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} /> } />
 
       </Switch>
     </Router>

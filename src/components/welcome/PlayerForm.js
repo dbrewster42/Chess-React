@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./PF.css"
 import { withRouter } from 'react-router-dom';
-import DataService from '../service/DataService';
+import DataService from '../../service/DataService';
 
 const PlayerForm = props => {
     //console.log("PF", props)

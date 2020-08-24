@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Board.css"
 import DataService from '../../service/DataService';
+import Details from '../Details'
 
 function importAll(r) {
     let images = {};
@@ -15,9 +16,11 @@ function importAll(r) {
 const Board = (props) => {    
     console.log(props.data)
     let [isMove, setIsMove] = useState(false);
-    let [startID, setStartID] = useState(88);
-    let [endID, setEndID] = useState(88);
+    let [start, setStart] = useState(88);
+//    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
+    let [status] = useState(props.data[64])
+    //console.log(status);
     // let [move, setMove] = useState({});
     // const [data] = useState([...props.data]);  
     // const [otherData, setOtherData] = useState([])
@@ -28,8 +31,8 @@ const Board = (props) => {
         const newRow = [];
         let count = i * 8;        
         for (let j = 0; j<8; j++){
-            if ((i + j) % 2 == 1){                
-                newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : props.data[count].name != null ? selectPiece : undefined }>
+            if ((i + j) % 2 === 1){                
+                newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
                    { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -37,7 +40,7 @@ const Board = (props) => {
                     }                    
                 </div>)
             }else {
-                newRow.push(<div key={count} id={i * 10 + j} className="squares y" onClick={isMove ? selectMove : props.data[count].name != null ? selectPiece : undefined  }>
+                newRow.push(<div key={count} id={i * 10 + j} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
                      { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -51,34 +54,43 @@ const Board = (props) => {
         return <div className="rows" key={i}>{newRow}</div>;
     }
     //newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : (props.data[count].name != null && hasPiece(props.data[count].name)) ? selectPiece : undefined }></div>
+    //(props.data[count].name != null && props.data[count].isWhite == isWhite))
+
     function Column(){
         // console.log("row", props.data)        
         const Board = []        
         for (let i = 0; i<8; i++){
-            Board.push(Row(i));
-            
+            Board.push(Row(i));            
         }
         return Board;
     }
 
+    const unselect = () => {
+        setIsMove(false);
+    }
+
     const selectPiece = e => {    
-        console.log("Selecting piece ", e.currentTarget)
-        // console.log(e.currentTarget.id)         
-        setStartID(e.currentTarget.id)
+        console.log(e.currentTarget) 
+        console.log("Selecting piece ", e.currentTarget.id)
+        let numb = parseInt(e.currentTarget.id)                
+        setStart(numb);
         setIsMove(true);
     }
 
     const selectMove = e => {
         console.log(e.currentTarget)
         console.log("Moving to ", e.currentTarget.id);
-        // console.log(e.target.id.value)
-        setEndID(e.currentTarget.id)
-        setIsMove(false);
+        //console.log(e.target.id.value)
+        let end = parseInt(e.currentTarget.id)
+        //setEnd(num);
+        console.log(end)        
         const move = {
-            start : startID,
-            end : endID,
+            start,
+            end,
             isWhite
         }
+        setIsMove(false);
+        console.log(move);
         DataService.makeMove(move)
             .then(res => {
                 console.log(res.data);
@@ -106,7 +118,8 @@ const Board = (props) => {
     //  },[]); 
     
     return ( 
-        <div id="main">             
+        <div id="main">  
+            <Details status={status} isMove={isMove} unselect={unselect} />           
             {Column()}                
         </div>
         

@@ -4,3 +4,24 @@
   text-align: center;
   height: 70px;
 }
+.white {
+  background-color: white;
+  color: red; 
+}
+.black {
+  background-color: black;
+  color: red;
+  
+}
+.details {
+  text-align: center;
+  margin: 3%;
+  border: 2px dashed royalblue;
+}
+
+.detailButtons {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  width: 10px;
+}

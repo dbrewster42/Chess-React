@@ -25,7 +25,7 @@ const Welcome = props => {
             <h1>Rules</h1> 
             <div id="body">         
                 <div id="left">
-                    <h2>Specific Game Rules</h2>
+                    <h2 className="blues">Specific Game Rules</h2>
 
                     <p>To select a piece, you first choose it's vertical location, 0-7. Then select it's horizontal direction, also 0-7. <br />
                         You then enter this 2 digit number to select the piece and you choose the piece's new location in the same way. The
@@ -40,7 +40,7 @@ const Welcome = props => {
                     </p>
 
                     <br></br>
-                    <h2>Special Functionalities</h2>
+                    <h2 className="blues">Special Functionalities</h2>
                     <ul><strong>Any Time During Turn</strong>
                         <li>999- Shows Count of All Piece Types from Both Team</li>
                         <li>888- Shows More Detailed Board where each Square is individually marked</li>
@@ -57,7 +57,7 @@ const Welcome = props => {
                     </ul>
 
                     <br></br>
-                    <h2>Special Moves</h2>
+                    <h2 className="blues">Special Moves</h2>
                     <ul>
                         <li><strong>En Passant</strong> may only be used if the capturing pawn must be on its fifth rank. The threatened pawn must have moved two squares from its starting square, and be on an adjacent file.</li>                
                         <li><strong>Castle</strong> may only be used if the king has never moved, the rook involved has never moved, the squares between the king and the rook involved are unoccupied, the king is not in check, and the king does not cross over or end on a square attacked by an enemy piece.</li>
@@ -68,7 +68,7 @@ const Welcome = props => {
                 
                 <div id="right">
                     <br></br>
-                    <h2>General Chess Rules</h2>
+                    <h2 className="blues">General Chess Rules</h2>
 
                     <p>White is always first to move and players take turns alternately moving one piece at a time. A movement is required. If
                         a player´s turn is to move, he is not in check but has no legal moves, this situation is called “Stalemate” and it
@@ -81,7 +81,7 @@ const Welcome = props => {
                         checkmated looses. </p>
 
                     <br></br>
-                    <h2>Rules for each Piece's Movement</h2>
+                    <h2 className="blues">Rules for each Piece's Movement</h2>
                     <p>These are 100% followed. Any invalid movement will be caught and not implemented</p>
                     <ul>
                         <li><strong>King</strong> can move exactly one square horizontally, vertically, or diagonally. Once in every game, each king is allowed to make a special move, known as castling.</li>
@@ -99,7 +99,7 @@ const Welcome = props => {
                     </ul>
 
                     <br></br>
-                    <h2>Game Status(es)</h2>
+                    <h2 className="blues">Game Status(es)</h2>
                     <ul>
                         <li>Active</li>
                         <li>Check</li>
