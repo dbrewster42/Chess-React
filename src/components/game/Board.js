@@ -14,25 +14,26 @@ function importAll(r) {
   }
 
 const Board = (props) => {    
-    console.log(props.data)
+    //console.log(props.data)
     let [isMove, setIsMove] = useState(false);
     let [start, setStart] = useState(88);
 //    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
     let [status] = useState(props.data[64])
-    //console.log(status);
+    console.log(status);
     // let [move, setMove] = useState({});
     // const [data] = useState([...props.data]);  
     // const [otherData, setOtherData] = useState([])
     
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
 
+
     function Row(i){
         const newRow = [];
         let count = i * 8;        
         for (let j = 0; j<8; j++){
             if ((i + j) % 2 === 1){                
-                newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
+                newRow.push(<div key={count} id={i * 10 + j} count={count} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
                    { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -40,7 +41,7 @@ const Board = (props) => {
                     }                    
                 </div>)
             }else {
-                newRow.push(<div key={count} id={i * 10 + j} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
+                newRow.push(<div key={count} id={i * 10 + j} count={count} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
                      { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -72,18 +73,21 @@ const Board = (props) => {
     const selectPiece = e => {    
         console.log(e.currentTarget) 
         console.log("Selecting piece ", e.currentTarget.id)
-        let numb = parseInt(e.currentTarget.id)                
-        setStart(numb);
-        setIsMove(true);
+        let count = e.currentTarget.count;         
+        if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
+            let numb = parseInt(e.currentTarget.id)               
+            setStart(numb);
+            setIsMove(true);
+        } else {
+            console.log("That is not your piece!")
+        }       
     }
 
     const selectMove = e => {
-        console.log(e.currentTarget)
-        console.log("Moving to ", e.currentTarget.id);
-        //console.log(e.target.id.value)
-        let end = parseInt(e.currentTarget.id)
-        //setEnd(num);
-        console.log(end)        
+        //console.log(e.currentTarget)
+        console.log("Moving to ", e.currentTarget.id);        
+        let end = parseInt(e.currentTarget.id);        
+        //console.log(end);
         const move = {
             start,
             end,
@@ -93,16 +97,33 @@ const Board = (props) => {
         console.log(move);
         DataService.makeMove(move)
             .then(res => {
-                console.log(res.data);
-                setIsWhite((prev) => !prev)
-                //setIsWhite(res.data[64].isWhite)/////////////////////////////////////
+                //console.log(res.data);
+                setIsWhite((prev) => !prev)                
                 props.setTheBoard(res.data);
             })
             .catch(err => {
                 console.log(err)
             })
     }
+    const specialMove = () => {
+        let end = 999;
+        const move = {
+            start,
+            end,
+            isWhite
+        }
+        setIsMove(false);
+        console.log(move);
+        DataService.makeMove(move)
+            .then(res => {
+                setIsWhite((prev) => !prev);
+                props.setTheBoard(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
+    }
     // const showBoard = () => {
     //     DataService.getBoard()
     //         .then(res => {
@@ -119,7 +140,7 @@ const Board = (props) => {
     
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} />           
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />           
             {Column()}                
         </div>
         

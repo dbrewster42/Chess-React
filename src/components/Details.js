@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import "../App.css"
 
 const Details = props => {
-    //console.log(props.status);
+    console.log(props.status);
     //let [team] = useState([props.status.team])
-    let className = "black details";
+    let className = "details";
     if (props.status.isWhite){
-        className = "white details";
+        className = "white " + className;
+    } else {
+        className = "black " + className;
     }
     
     // const countPieces = team => {
@@ -21,12 +23,12 @@ const Details = props => {
     return ( 
         <div className={className}>            
             <h2>It is {props.status.playerName}'s turn</h2>
-            {props.status.check && <h4>You must move out of check</h4>}
-            <p>{props.status.team.length} Pieces</p>
-            {props.isMove && <button className="detailButtons" onClick={props.unselect}>Unselect</button> &&
-            <button className="detailButtons" onClick={props.unselect}>Special Move</button>
-            }           
-            
+            {props.status.check && <h3>You must move out of check</h3>}
+            {/* <p>{props.status.team.length} Pieces</p> */}
+            {/* <button className="detailButtons" onClick={props.unselect}>Display Moves</button>            
+            <button className="detailButtons" onClick={props.unselect}>Count Pieces</button>         */}
+            {props.isMove && <button className="detailButtons" onClick={props.specialMove}>Special Move</button>}
+            {props.isMove && <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> } 
         </div>
      );
 }

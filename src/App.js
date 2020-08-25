@@ -3,15 +3,17 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  useHistory
 } from "react-router-dom";
 import Header from "./components/Header"
 import Welcome from "./components/welcome/Welcome"
 import Board from "./components/game/Board"
 
-function App(props) {
+function App() {
   const [data, setData] = useState([]);
-
+  //const history = useHistory();
+  
   // const showBoard = () => {
   //   DataService.getBoard()
   //       .then(res => {
@@ -28,6 +30,7 @@ function App(props) {
   const setTheBoard = data => {
     console.log("app", data);
     setData([...data]);
+    //history.push("/game");
   }
 
   return (

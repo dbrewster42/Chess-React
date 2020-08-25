@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "./PF.css"
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import DataService from '../../service/DataService';
 
 const PlayerForm = props => {
@@ -8,21 +8,20 @@ const PlayerForm = props => {
     const [name, setName] = useState("Your Name");
     const [names] = useState([])
     const [player, setPlayer] = useState(1);
+    const history = useHistory();
 
     const handleChange = e => {               
         setName(e.target.value);
     }   
 
-    const addPlayers = body => {
-        // axios.post(url, name)
+    const addPlayers = body => {        
         console.log(body)
         DataService.createPlayers(body)
         .then(res => {
             console.log("added player", res);
-            props.setTheBoard(res.data);
-            // let newData = res.data;
-            // setData([...newData]);
+            props.setTheBoard(res.data);            
             //props.history.push('/game')
+            history.push('/game');
         })
         .catch(err => {
             console.log(err)
@@ -39,10 +38,7 @@ const PlayerForm = props => {
                 name2: names[1]
             }
             addPlayers(body);
-            setPlayer(0);
-            //props.history.push('/game')
-            // window.location = '/game';
-            //props.showBoard();
+            setPlayer(player-2);                   
         }
         setName("");
         setPlayer(player + 1);
