@@ -19,7 +19,7 @@ const Board = (props) => {
     let [start, setStart] = useState(88);
 //    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
-    let [status] = useState(props.data[64])
+    let [status, setStatus] = useState(props.data[64])
     console.log(status);
     // let [move, setMove] = useState({});
     // const [data] = useState([...props.data]);  
@@ -33,7 +33,7 @@ const Board = (props) => {
         let count = i * 8;        
         for (let j = 0; j<8; j++){
             if ((i + j) % 2 === 1){                
-                newRow.push(<div key={count} id={i * 10 + j} count={count} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
+                newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
                    { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -41,7 +41,7 @@ const Board = (props) => {
                     }                    
                 </div>)
             }else {
-                newRow.push(<div key={count} id={i * 10 + j} count={count} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
+                newRow.push(<div key={count} id={i * 10 + j} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
                      { (props.data[count].name != null) &&
                         <img src={images[props.data[count].name]}
                         className="icons"
@@ -104,8 +104,9 @@ const Board = (props) => {
         DataService.makeMove(move)
             .then(res => {
                 //console.log(res.data);
-                setIsWhite((prev) => !prev)                
+                setIsWhite((prev) => !prev);                
                 props.setTheBoard(res.data);
+                setStatus(res.data[64]);
             })
             .catch(err => {
                 console.log(err)
@@ -124,6 +125,7 @@ const Board = (props) => {
             .then(res => {
                 setIsWhite((prev) => !prev);
                 props.setTheBoard(res.data);
+                setStatus(res.data[64]);
             })
             .catch(err => {
                 console.log(err);
