@@ -73,7 +73,13 @@ const Board = (props) => {
     const selectPiece = e => {    
         console.log(e.currentTarget) 
         console.log("Selecting piece ", e.currentTarget.id)
-        let count = e.currentTarget.count;         
+        console.log(e.currentTarget.count)
+        let multiplier = parseInt(e.currentTarget.id / 10);
+        let count = e.currentTarget.id - multiplier * 2 ;
+        console.log(multiplier, "newCount", count)
+        // let count = e.currentTarget.count; 
+        // console.log(count);
+        console.log(props.data[count]);        
         if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
             let numb = parseInt(e.currentTarget.id)               
             setStart(numb);

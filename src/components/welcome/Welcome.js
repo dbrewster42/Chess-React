@@ -27,29 +27,31 @@ const Welcome = props => {
                 <div id="left">
                     <h2 className="blues">Specific Game Rules</h2>
 
-                    <p>To select a piece, you first choose it's vertical location, 0-7. Then select it's horizontal direction, also 0-7. <br />
-                        You then enter this 2 digit number to select the piece and you choose the piece's new location in the same way. The
-                        program will check to ensure that it is a valid movement and it will direct you to rechoose if it isn't.
+                    <p>Click on a piece to select it. Two new options will pop up in the header- Unselect and Special Move. If you wish to select a different piece, 
+                        click on unselect. If you wish to perform a Castle, click on your Rook and then click Special Move; if the conditions for Castling are valid, then 
+                        the program will Castle for you. If you wish to perform en Passant, click on the Pawn you wish to use and then click on Special Move. The program will
+                        perform the special move for you if the conditions are valid. See below for proper Castling and en Passant conditions. <br></br>
+                        Otherwise, click on the tile you wish to move your piece to and whala, you have made your move.
                     </p>
-
-                    <p>Click on the piece you wish to move, an "Unselect" button will pop up and you can click on that to choose a different piece or, if you are not
+                    <p>If you attempt to make a move that is not legal, the move will not be processed and then you will be notified to try again</p>
+                    {/* <p>Click on the piece you wish to move, an "Unselect" button will pop up and you can click on that to choose a different piece or, if you are not
                     making a special move, select the location you wish to move your piece to. If your move is not a valid chess move, you will be prompted to try again.
                     The only exceptions are with Castles and en Passant. If you wish to castle, select the Rook you wish to use and then click on the Special Move button.
                     If you wish to use en Passant, select the pawn you wish to use and then click on the Special Move button.
                         See below for the valid conditions to make these special moves.
-                    </p>
+                    </p> */}
 
                     <br></br>
                     <h2 className="blues">Special Functionalities</h2>
                     <ul><strong>Any Time During Turn</strong>
-                        <li>999- Shows Count of All Piece Types from Both Team</li>
-                        <li>888- Shows More Detailed Board where each Square is individually marked</li>
-                        <li>777- Prints a List of All Moves</li>
+                        <li>Piece Count- Will Display a Count of All Piece Types from Both Team</li>
+                        <li>Display Moves- Prints a List of All Moves</li>                        
                     </ul>
                     <ul> <strong>During Piece Selection</strong>
                         
-                        <li>444- Undoes last round (using a Memento)</li>
-                        <li>1111- Forfeit</li>
+                        <li>Undo- Undoes last round of moves</li>
+                        <li>Forfeit- Forfeits the game</li>
+                        <li>Stalemate- The game will check to see if stalemate applies. If so, it will be declared a draw</li>
                     </ul>
                     <ul> <strong>During Move Selection</strong>    
                         <li>333- Castles (the proper Rook must be selected)</li>
@@ -63,6 +65,15 @@ const Welcome = props => {
                         <li><strong>Castle</strong> may only be used if the king has never moved, the rook involved has never moved, the squares between the king and the rook involved are unoccupied, the king is not in check, and the king does not cross over or end on a square attacked by an enemy piece.</li>
                         <li><strong>Pawn Promotion</strong> is when a pawn makes it to the other side of the board. Upon reaching the back row, the pawn becomes a queen</li>
                         <li>Undo</li>
+                    </ul>
+                    <br></br>
+                    <h2 className="blues">Game Status(es)</h2>
+                    <ul>
+                        <li>Active</li>
+                        <li>Check</li>
+                        <li>Checkmate</li>
+                        <li>Draw</li>
+                        <li>Stalemate (not included)</li>
                     </ul>
                 </div>
                 
@@ -96,19 +107,8 @@ const Welcome = props => {
                             piece on either of the two spaces adjacent to the space in front of them (i.e., the two squares diagonally in
                             front of them) but cannot move to these spaces if they are vacant. The pawn is also involved in the two special
                             moves en passant and promotion.</li>
-                    </ul>
-
-                    <br></br>
-                    <h2 className="blues">Game Status(es)</h2>
-                    <ul>
-                        <li>Active</li>
-                        <li>Check</li>
-                        <li>Checkmate</li>
-                        <li>Draw</li>
-                        <li>Stalemate (not included)</li>
-                    </ul>
+                    </ul>               
                   
-
                 </div>
 
             
