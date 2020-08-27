@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import PlayerForm from "./PlayerForm"
 import "./Welcome.css"
 
@@ -13,7 +12,7 @@ const Welcome = props => {
 
     return ( 
         <div id="welcome">            
-            <Link to="/game"><h1 className="start">Click Here to Begin</h1></Link>
+            {/* <Link to="/game"><h1 className="start">Click Here to Begin</h1></Link> */}
             <h1 className="start" onClick={toggleForm}>{">>>>>>>>>"} Start A Game {"<<<<<<<<<<"} </h1>
             {showsForm ? 
             <PlayerForm setTheBoard={props.setTheBoard} />

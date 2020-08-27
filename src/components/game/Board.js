@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import "./Board.css"
 import DataService from '../../service/DataService';
-import Details from '../Details'
+import Details from '../Details';
+import MovesList from '../MovesList';
 
 function importAll(r) {
     let images = {};
@@ -107,6 +108,7 @@ const Board = (props) => {
                 setIsWhite((prev) => !prev);                
                 props.setTheBoard(res.data);
                 setStatus(res.data[64]);
+                MovesList.updateMovesList();
             })
             .catch(err => {
                 console.log(err)
@@ -145,10 +147,11 @@ const Board = (props) => {
     // useEffect (() => {
     //     showBoard();
     //  },[]); 
-    
+    //  <MovesList updateMovesList={updateMovesList} /> 
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />           
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />
+            <MovesList />          
             {Column()}                
         </div>
         

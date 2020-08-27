@@ -5,9 +5,9 @@ const url = 'http://localhost:8080/game';
 
 class DataService {
     
-    getBoard(){
-        return axios.get(`${url}`);
-    }
+    // getBoard(){
+    //     return axios.get(`${url}`);
+    // }
 
     // getStatus(){
     //     return axios.get(`${url}/status`)
@@ -18,7 +18,15 @@ class DataService {
     }
 
     makeMove(move){
-        return axios.post(`${url}`, move)
+        return axios.post(`${url}`, move);
+    }
+
+    displayMoves(){
+        return axios.get(`${url}/moves`);
+    }
+
+    endGame(endRequest){
+        return axios.post(`${url}/end`, endRequest);
     }
    
 }
