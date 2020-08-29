@@ -1,5 +1,6 @@
 import React from 'react';
 import "../App.css"
+import DataService from '../service/DataService';
 
 const Details = props => {
     console.log(props.status);
@@ -27,6 +28,21 @@ const Details = props => {
 
     //     }
     // };{countPieces(props.status.team)}
+    const endTheGame = forfeit => {
+        let playerName = props.status.playerName;
+        let endRequest = {
+            forfeit,
+            playerName 
+        }
+        console.log(endRequest)
+        DataService.endGame(endRequest)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     return ( 
         <div className={classType}>            
@@ -36,8 +52,8 @@ const Details = props => {
             {/* <button className="detailButtons" onClick={props.unselect}>Display Moves</button>            
             <button className="detailButtons" onClick={props.unselect}>Count Pieces</button>         */}                       
                 
-            {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={props.unselect}>Forfeit</button> }
-            {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={props.unselect}>Draw</button> } 
+            {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={() => endTheGame(true)}>Forfeit</button> }
+            {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={() => endTheGame(false)}>Draw</button> } 
         </div>
      );
 }

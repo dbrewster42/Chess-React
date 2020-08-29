@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
 import "../App.css"
-import DataService from "../service/DataService"
 
-const MovesList = () => {
-    const [moves, setMoves] = useState([]);
-    
-    const updateMovesList = () => {
-        console.log("hey guys")
-        DataService.displayMoves()
-            .then(res => {
-                console.log(res.data)
-                setMoves(...res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
+const MovesList = props => {
+    console.log(props)
+    console.log(props.moves)    
+    let [moves, setMoves] = useState(props.moves)
+    let [showMoves, setShowMoves] = useState(false);
     return ( 
-        <div id="movesList">
-            <ol>
-                {moves.map((move, i) => {
-                    return <li key={i}>{move}</li>
-                })}
-            </ol>
-           
-        </div>
+        
+            <div id="movesList">
+                <button className="detailButtons">Show Moves</button>
+                {
+                    showMoves && 
+                    <ol>
+                    {props.moves.map((move, i) => {
+                        return <li key={i}>{move}</li>
+                    })}
+                </ol>
+                }
+                
+            
+            </div>
+       
      );
 }
  

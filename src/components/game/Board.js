@@ -22,12 +22,25 @@ const Board = (props) => {
     let [isWhite, setIsWhite] = useState(true);
     let [status, setStatus] = useState(props.data[64])
     console.log(status);
+    const [moves, setMoves] = useState([]);
     // let [move, setMove] = useState({});
     // const [data] = useState([...props.data]);  
     // const [otherData, setOtherData] = useState([])
     
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
-
+    
+    
+    const updateMovesList = () => {
+        console.log("hey guys")
+        DataService.displayMoves()
+            .then(res => {
+                console.log(res.data)
+                setMoves(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     function Row(i){
         const newRow = [];
@@ -108,7 +121,7 @@ const Board = (props) => {
                 setIsWhite((prev) => !prev);                
                 props.setTheBoard(res.data);
                 setStatus(res.data[64]);
-                MovesList.updateMovesList();
+                updateMovesList();
             })
             .catch(err => {
                 console.log(err)
@@ -128,6 +141,7 @@ const Board = (props) => {
                 setIsWhite((prev) => !prev);
                 props.setTheBoard(res.data);
                 setStatus(res.data[64]);
+                updateMovesList();
             })
             .catch(err => {
                 console.log(err);
@@ -150,9 +164,9 @@ const Board = (props) => {
     //  <MovesList updateMovesList={updateMovesList} /> 
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />
-            <MovesList />          
-            {Column()}                
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />                    
+            {Column()}     
+            <MovesList moves={moves} />             
         </div>
         
      );
