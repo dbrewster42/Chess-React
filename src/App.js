@@ -5,7 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import Header from "./components/Header"
+import Header from "./components/header/Header"
 import Welcome from "./components/welcome/Welcome"
 import Board from "./components/game/Board"
 

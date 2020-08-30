@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     background-color: #324b73;
+    margin: 0px;
 }
 .rows {
     display: flex;
@@ -34,6 +35,10 @@
     height: 90px;
 }
 
-.bord {
-    border: 2px solid yellow;
+#board {
+    margin: auto;
+    border: 1px solid royalblue;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
 }

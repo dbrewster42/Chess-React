@@ -30,8 +30,7 @@ const Board = (props) => {
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
     
     
-    const updateMovesList = () => {
-        console.log("hey guys")
+    const updateMovesList = () => {        
         DataService.displayMoves()
             .then(res => {
                 console.log(res.data)
@@ -164,9 +163,12 @@ const Board = (props) => {
     //  <MovesList updateMovesList={updateMovesList} /> 
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />                    
-            {Column()}     
-            <MovesList moves={moves} />             
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />
+            <div id="board">
+                {Column()}
+            </div>                    
+                 
+            <MovesList moves={moves} updateMovesList={updateMovesList} />             
         </div>
         
      );
