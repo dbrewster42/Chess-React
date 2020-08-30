@@ -1,24 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Header from "./components/Header"
-import Welcome from "./components/Welcome"
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
+import Header from "./components/header/Header"
+import Welcome from "./components/welcome/Welcome"
 import Board from "./components/game/Board"
-// import DataService from './service/DataService';
 
 function App() {
+  const [data, setData] = useState([]);
+  //const history = useHistory();
 
   // const showBoard = () => {
   //   DataService.getBoard()
-  //       .then(res => console.log(res))
+  //       .then(res => {
+  //           console.log(res.data);
+  //           let newData = res.data;
+  //           setData([...newData]);
+  //       })
   //       .catch(error => console.log(error))
-  // }
+  //   }
+  //   useEffect (() => {
+  //     showBoard();
+  //  },[]); 
+
+  const setTheBoard = data => {
+    console.log("app", data);
+    setData([...data]);
+    //history.push("/game");
+  }
 
   return (
-    <div className="App">
-      {/* <Header />
-      <Welcome /> */}
-      <Board />
-    </div>
+    <Router>
+      <Header />      
+      <Switch>
+        
+
+        <Route exact path="/">
+          <Welcome setTheBoard={setTheBoard} />
+        </Route>
+
+        {/* <Route exact path="/game">
+          <Board data={data} />
+        </Route>  */}
+        <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} /> } />
+
+      </Switch>
+    </Router>
+    
   );
 }
 

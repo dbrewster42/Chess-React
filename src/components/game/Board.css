@@ -4,6 +4,8 @@
 #main {
     display: flex;
     flex-direction: column;
+    background-color: #324b73;
+    margin: 0px;
 }
 .rows {
     display: flex;
@@ -20,6 +22,23 @@
 .g {
     background-color: #8f4306;
 }
+.g:hover {
+    background-color: limegreen;
+}
 .y {
     background-color: burlywood;
+}
+.y:hover {
+    background-color: limegreen;
+}
+.icons {    
+    height: 90px;
+}
+
+#board {
+    margin: auto;
+    border: 1px solid royalblue;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
 }
