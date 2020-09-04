@@ -31,3 +31,17 @@
   margin-left: 2%;
   background-color: slategray;
 }
+
+#check{
+  text-decoration: wavy;
+  /* background-color: royalblue; */
+  width: 450px;
+  margin: auto;
+  animation-name: check;
+  animation-duration: 10s;
+}
+
+@keyframes check {
+  from {background-color: black;}
+  to {background-color: royalblue;}
+}

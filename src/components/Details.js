@@ -47,7 +47,7 @@ const Details = props => {
     return ( 
         <div className={classType}>            
             <h2>It is {props.status.playerName}'s turn</h2>
-            {props.status.check && <h3>You must move out of check!</h3>}
+            {props.status.check && <h1 id="check">You must move out of check!</h1>}
             {/* <p>{props.status.team.length} Pieces</p> */}
             {/* <button className="detailButtons" onClick={props.unselect}>Display Moves</button>            
             <button className="detailButtons" onClick={props.unselect}>Count Pieces</button>         */}                       
