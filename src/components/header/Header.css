@@ -5,6 +5,7 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
+    margin: 0px;
 }
 .imgs {
     height: 100px;
