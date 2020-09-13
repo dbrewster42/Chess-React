@@ -22,12 +22,19 @@
   width: 70px;
 }
 
+#giantButton{
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  width: 200px;
+}
 .r {
   margin-left: 75px;
 }
 
 #mainMoves{
   width: 20%;
+  margin-left: 2%;
   display: inline-block;
   margin-top: auto;
 }
@@ -36,11 +43,11 @@
   width: 100%;
   height: 20%;  
   margin-right: .5%;
-  margin-left: 0px;
+  /* margin-left: 2%; */
   background-color: slategray;
 }
 
-#check{
+.check{
   text-decoration: wavy;
   /* background-color: royalblue; */
   width: 450px;
