@@ -124,10 +124,10 @@ const Board = (props) => {
             })
             .catch(err => {
                 console.log(err)
-                console.log(err.errMessage)
+                console.log(err.response.data)
                 console.log(err.message)
-                console.log(err.status)
-                console.log(err.errReason)
+                console.log(err.response)
+                console.log(err.data)
             })
     }
     const specialMove = () => {
