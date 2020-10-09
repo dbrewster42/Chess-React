@@ -29,7 +29,7 @@
   width: 200px;
 }
 .r {
-  margin-left: 75px;
+  margin-left: 35%;
 }
 
 #mainMoves{
@@ -37,11 +37,13 @@
   margin-left: 2%;
   display: inline-block;
   margin-top: auto;
+  height: 820px;
 }
 #movesList{
   overflow: scroll;
   width: 100%;
   height: 20%;  
+  height: 800px;
   margin-right: .5%;
   /* margin-left: 2%; */
   background-color: slategray;

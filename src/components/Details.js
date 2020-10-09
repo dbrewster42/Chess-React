@@ -60,6 +60,8 @@ const Details = props => {
             {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={() => endTheGame(true)}>Forfeit</button> }
             {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={() => endTheGame(false)}>Draw</button> } 
             {props.status.check && <h1 className="check">You must move out of check!</h1>}
+            {props.errorMessage && <h1 className="check">{ props.errorMessage }</h1> }
+
             
         </div>
      );
