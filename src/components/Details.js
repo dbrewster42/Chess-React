@@ -45,15 +45,22 @@ const Details = props => {
     }
 
     return ( 
-        <div className={classType}>            
-            <h2>It is {props.status.playerName}'s turn</h2>
-            {props.status.check && <h3>You must move out of check!</h3>}
+        <div className={classType}>  
+            {props.status.active ? <h2>It is {props.status.playerName}'s turn</h2> :
+            <div>
+                 <h1 className="check">GAME OVER</h1>
+            <button id="giantButton">RESTART</button>
+            </div>} 
+                     
+                       
             {/* <p>{props.status.team.length} Pieces</p> */}
             {/* <button className="detailButtons" onClick={props.unselect}>Display Moves</button>            
             <button className="detailButtons" onClick={props.unselect}>Count Pieces</button>         */}                       
                 
             {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={() => endTheGame(true)}>Forfeit</button> }
             {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={() => endTheGame(false)}>Draw</button> } 
+            {props.status.check && <h1 className="check">You must move out of check!</h1>}
+            
         </div>
      );
 }

@@ -15,10 +15,9 @@ const MovesList = props => {
         //props.updateMovesList();
         setShowMoves((prev) => !prev);
     }
-    return ( 
-        
-            <div>
-                <button className="detailButtons" onClick={() => showDaMoves()}>Show Moves</button>
+    return (         
+            <div id="mainMoves">
+                <button className="detailButtons r" onClick={() => showDaMoves()}>Show Moves</button>
 
                 {
                     showMoves && 
