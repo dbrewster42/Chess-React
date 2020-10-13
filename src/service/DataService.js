@@ -12,6 +12,9 @@ class DataService {
     // getStatus(){
     //     return axios.get(`${url}/status`)
     // }
+    restartGame(){
+        return axios.post(`${url}/restart`);
+    }
 
     createPlayers(body){
         return axios.post(`${url}/players`, body);

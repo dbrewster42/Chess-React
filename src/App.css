@@ -11,7 +11,7 @@
   text-align: center;
   margin: 1% auto;
   border: 2px solid royalblue;
-  height: 100px;
+  height: 110px;
   width: 600px;
 }
 
@@ -19,15 +19,27 @@
   background-color: red;
   color: white;
   border-radius: 5px;
-  width: 70px;
+  width: 70px;  
 }
 
-#giantButton{
+.tooltip{
   background-color: red;
   color: white;
   border-radius: 10px;
   width: 200px;
+  position: relative;
+  /* border: 1px solid black; */
 }
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  position: absolute;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 .r {
   margin-left: 35%;
 }

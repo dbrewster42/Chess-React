@@ -149,10 +149,28 @@ const Board = (props) => {
                 updateMovesList();
             })
             .catch(err => {
-                console.log(err);
-                console.log(err.response.data)               
+                console.log(err)
+                console.log(err.response.data)
+                window.alert(err.response.data.errMessage)       
             })
 
+    }
+    const endTheGame = forfeit => {
+        let playerName = status.playerName;
+        let endRequest = {
+            forfeit,
+            playerName 
+        }
+        console.log(endRequest)
+        DataService.endGame(endRequest)
+            .then(res => {
+                console.log(res.data)
+                setStatus(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert(err.response.data.errMessage)
+            })
     }
     // const showBoard = () => {
     //     DataService.getBoard()
@@ -168,6 +186,7 @@ const Board = (props) => {
     //     showBoard();
     //  },[]); 
     //  <MovesList updateMovesList={updateMovesList} /> 
+    
     return ( 
         <div id="main">  
             <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />                                
