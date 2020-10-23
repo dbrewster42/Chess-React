@@ -3,22 +3,18 @@ import "../App.css"
 
 const MovesList = props => {
     console.log(props.moves)
-    let [showMoves, setShowMoves] = useState(false);
-    if (showMoves){
-        console.log(props.moves.moves)    
-    }
-    
+    let [showMoves, setShowMoves] = useState(false);    
     // let [moves, setMoves] = useState(props.moves)
     
 
-    const showDaMoves = () => {
-        //props.updateMovesList();
+    const showDaMoves = () => {        
         setShowMoves((prev) => !prev);
     }
     return (         
             <div id="mainMoves">
-                <button className="detailButtons r" onClick={() => showDaMoves()}>Show Moves</button>
-
+                {props.moves.moves &&                
+                    <button className="detailButtons r" onClick={() => showDaMoves()}>Show Moves</button>
+                }
                 {
                     showMoves && 
                     <div id="movesList">

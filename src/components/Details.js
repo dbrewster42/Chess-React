@@ -1,7 +1,7 @@
 import React from 'react';
 import "../App.css"
 import DataService from '../service/DataService';
-import App from '../App.js';
+// import App from '../App.js';
 import { withRouter, useHistory } from 'react-router-dom';
 
 const Details = props => {
@@ -33,10 +33,10 @@ const Details = props => {
     // };{countPieces(props.status.team)}
     
     const restart = () => {
-        DataService.restart()
+        DataService.restartGame()
         .then(res => {
-            console.log(res.data);
-            App.setTheBoard(res.data);
+            console.log(res);
+            props.setTheBoard(res.data);
         })
         .catch(err => {
             console.log(err);

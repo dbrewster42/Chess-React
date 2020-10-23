@@ -189,7 +189,7 @@ const Board = (props) => {
     
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />                                
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
                  
             <MovesList moves={moves} updateMovesList={updateMovesList} /> 
             <div id="board">
