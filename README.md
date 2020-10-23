@@ -1,3 +1,6 @@
+FULLY FUNCTIONAL CHESS GAME - when downloaded with Chess-Spring
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
