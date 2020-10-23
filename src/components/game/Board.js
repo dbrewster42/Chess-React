@@ -21,6 +21,7 @@ const Board = (props) => {
 //    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
     let [status, setStatus] = useState(props.data[64])
+    //let [errorMessage, setErrorMessage] = useState('');
     console.log(status);
     const [moves, setMoves] = useState([]);
     // let [move, setMove] = useState({});
@@ -120,14 +121,14 @@ const Board = (props) => {
                 setIsWhite((prev) => !prev);                
                 props.setTheBoard(res.data);
                 setStatus(res.data[64]);
+                //setErrorMessage('');
                 updateMovesList();
             })
             .catch(err => {
                 console.log(err)
                 console.log(err.response.data)
-                console.log(err.message)
-                console.log(err.response)
-                console.log(err.data)
+                window.alert(err.response.data.errMessage)
+                //setErrorMessage(err.response.data.errMessage)
             })
     }
     const specialMove = () => {
@@ -144,12 +145,32 @@ const Board = (props) => {
                 setIsWhite((prev) => !prev);
                 props.setTheBoard(res.data);
                 setStatus(res.data[64]);
+                //setErrorMessage('');
                 updateMovesList();
             })
             .catch(err => {
-                console.log(err);               
+                console.log(err)
+                console.log(err.response.data)
+                window.alert(err.response.data.errMessage)       
             })
 
+    }
+    const endTheGame = forfeit => {
+        let playerName = status.playerName;
+        let endRequest = {
+            forfeit,
+            playerName 
+        }
+        console.log(endRequest)
+        DataService.endGame(endRequest)
+            .then(res => {
+                console.log(res.data)
+                setStatus(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert(err.response.data.errMessage)
+            })
     }
     // const showBoard = () => {
     //     DataService.getBoard()
@@ -165,14 +186,15 @@ const Board = (props) => {
     //     showBoard();
     //  },[]); 
     //  <MovesList updateMovesList={updateMovesList} /> 
+    
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} />
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
+                 
+            <MovesList moves={moves} updateMovesList={updateMovesList} /> 
             <div id="board">
                 {Column()}
-            </div>                    
-                 
-            <MovesList moves={moves} updateMovesList={updateMovesList} />             
+            </div>            
         </div>
         
      );

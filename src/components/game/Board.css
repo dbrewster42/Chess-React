@@ -36,11 +36,12 @@
     height: 90px;
 }
 
-#board {
-   
+#board {   
     border: 1px solid royalblue;
     display: inline-block;
     flex-direction: column;
     width: 800px;
-    margin-left: 25%;   
+    margin-left: 5%;
+    height: 820px;
+    /* margin-left: 25%;    */
 }
