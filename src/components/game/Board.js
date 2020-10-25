@@ -172,6 +172,23 @@ const Board = (props) => {
                 window.alert(err.response.data.errMessage)
             })
     }
+    const generateHeaders = vertical => {
+        let newHeader = [];
+        const rows = "abcdefgh"       
+        if (vertical){
+            for (let i =0; i< 8; i++){
+                newHeader.push(<div key={i} className="vsquare">{i + 1}</div>);
+            }            
+        } else {
+            for (let i =0; i< 8; i++){
+                newHeader.push(<div key={i} className="hsquare">{rows[i]}</div>);
+            } 
+        }
+
+        
+        
+        return newHeader;
+    }
     // const showBoard = () => {
     //     DataService.getBoard()
     //         .then(res => {
@@ -190,11 +207,16 @@ const Board = (props) => {
     return ( 
         <div id="main">  
             <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
-                 
-            <MovesList moves={moves} updateMovesList={updateMovesList} /> 
-            <div id="board">
-                {Column()}
-            </div>            
+            <div id="flexHolder">
+                <MovesList moves={moves} updateMovesList={updateMovesList} /> 
+                <div id="totalBoard">
+                    <div id="board">
+                        {Column()}
+                    </div> 
+                    <div id="vtag">{generateHeaders(true)}</div>                                                  
+                </div>            
+            </div>
+            <div id="htag">{generateHeaders(false)}</div>  
         </div>
         
      );
