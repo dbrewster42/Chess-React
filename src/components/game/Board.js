@@ -24,9 +24,6 @@ const Board = (props) => {
     //let [errorMessage, setErrorMessage] = useState('');
     console.log(status);
     const [moves, setMoves] = useState([]);
-    // let [move, setMove] = useState({});
-    // const [data] = useState([...props.data]);  
-    // const [otherData, setOtherData] = useState([])
     
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
     
@@ -71,8 +68,7 @@ const Board = (props) => {
     //newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : (props.data[count].name != null && hasPiece(props.data[count].name)) ? selectPiece : undefined }></div>
     //(props.data[count].name != null && props.data[count].isWhite == isWhite))
 
-    function Column(){
-        // console.log("row", props.data)        
+    function Column(){        
         const Board = []        
         for (let i = 0; i<8; i++){
             Board.push(Row(i));            
@@ -91,8 +87,6 @@ const Board = (props) => {
         let multiplier = parseInt(e.currentTarget.id / 10);
         let count = e.currentTarget.id - multiplier * 2 ;
         console.log(multiplier, "newCount", count)
-        // let count = e.currentTarget.count; 
-        // console.log(count);
         console.log(props.data[count]);        
         if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
             let numb = parseInt(e.currentTarget.id)               
@@ -100,14 +94,19 @@ const Board = (props) => {
             setIsMove(true);
         } else {
             console.log("That is not your piece!")
+            window.alert("That is not your piece!")
+            //****************ADD LOGIC HERE */
         }       
     }
 
     const selectMove = e => {
         //console.log(e.currentTarget)
         console.log("Moving to ", e.currentTarget.id);        
-        let end = parseInt(e.currentTarget.id);        
-        //console.log(end);
+        let end = parseInt(e.currentTarget.id); 
+        if (end == start){
+            setIsMove(false);
+            return;
+        }       
         const move = {
             start,
             end,
@@ -183,10 +182,7 @@ const Board = (props) => {
             for (let i =0; i< 8; i++){
                 newHeader.push(<div key={i} className="hsquare">{rows[i]}</div>);
             } 
-        }
-
-        
-        
+        }   
         return newHeader;
     }
     // const showBoard = () => {

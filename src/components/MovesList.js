@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import "../App.css"
 
 const MovesList = props => {
-    console.log(props.moves)
+    //console.log(props.moves)
     let [showMoves, setShowMoves] = useState(false);    
-    // let [moves, setMoves] = useState(props.moves)
-    
+    // let [moves, setMoves] = useState(props.moves)    
 
     const showDaMoves = () => {        
         setShowMoves((prev) => !prev);

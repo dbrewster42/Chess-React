@@ -112,7 +112,7 @@ const Welcome = props => {
 
             
             </div> 
-           
+            <PlayerForm setTheBoard={props.setTheBoard} />
          
         </div>
      );

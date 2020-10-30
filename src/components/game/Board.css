@@ -23,7 +23,9 @@
     margin: 0px;
     border: 1px solid black; 
 }
-
+.b {
+    background-color: black;
+}
 .g {    
     background-color: #8f4306;
 }
