@@ -1,5 +1,9 @@
 FULLY FUNCTIONAL CHESS GAME - when downloaded with Chess-Spring
 
+TO DO
+1. Highlight Selected Piece
+2. Reorganize layout to incorporate width (move details to the side, probably add piece count)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
