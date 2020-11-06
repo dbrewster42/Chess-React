@@ -25,7 +25,7 @@ const Board = (props) => {
     //let [errorMessage, setErrorMessage] = useState('');
     console.log(status);
     const [moves, setMoves] = useState([]);
-    let [clicked, setClicked] = useState(false);
+    //let [clicked, setClicked] = useState(false);
     //let [squareStyle] = useState('squares ');
     //let [squareType, setSquareType] = useState("squares ");
     
@@ -57,7 +57,7 @@ const Board = (props) => {
             }        
             newRow.push(
                 <Square 
-                    key={count} 
+                    key={count}
                     i={i} 
                     j={j} 
                     squareStyle={squareStyle}
@@ -69,8 +69,7 @@ const Board = (props) => {
                     selectMove={selectMove} 
                 />
             )            
-            count++;
-            
+            count++;            
         }
         return <div className="rows" key={i}>{newRow}</div>;
     }
@@ -85,7 +84,7 @@ const Board = (props) => {
 
     const unselect = () => {
         setIsMove(false);
-        setClicked(false);
+        //setClicked(false);
     }
 
     const selectPiece = e => {    
@@ -100,8 +99,6 @@ const Board = (props) => {
             let numb = parseInt(e.currentTarget.id)               
             setStart(numb);
             setIsMove(true);
-            //highlightBackground(numb);
-            setClicked(true);
         } else {
             console.log("That is not your piece!")
             window.alert("That is not your piece!")
@@ -114,8 +111,8 @@ const Board = (props) => {
         console.log("Moving to ", e.currentTarget.id);        
         let end = parseInt(e.currentTarget.id); 
         if (end === start){
-            //setIsMove(false);
-            unselect();
+            setIsMove(false);
+            //unselect();
             return;
         }       
         const move = {
@@ -123,8 +120,8 @@ const Board = (props) => {
             end,
             isWhite
         }
-        //setIsMove(false);
-        unselect();
+        setIsMove(false);
+        //unselect();
         console.log(move);
         DataService.makeMove(move)
             .then(res => {

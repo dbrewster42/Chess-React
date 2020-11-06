@@ -1,9 +1,10 @@
 .details {
   text-align: center;
-  margin: 1% auto;
+  margin: 1%;
+  margin-left: 27%;
   border: 2px solid royalblue;
   height: 120px;
-  width: 720px;
+  width: 40%;
   background-color: black;
   color: red;
 }
