@@ -1,18 +1,12 @@
-.white {
-  background-color: white;
-  color: red; 
-}
-.black {
-  background-color: black;
-  color: red;
-  
-}
 .details {
   text-align: center;
-  margin: 1% auto;
+  margin: 1%;
+  margin-left: 27%;
   border: 2px solid royalblue;
-  height: 110px;
-  width: 600px;
+  height: 120px;
+  width: 40%;
+  background-color: black;
+  color: red;
 }
 
 .detailButtons {

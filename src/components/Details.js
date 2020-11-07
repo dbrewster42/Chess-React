@@ -2,17 +2,17 @@ import React from 'react';
 import "../App.css"
 import DataService from '../service/DataService';
 // import App from '../App.js';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Details = props => {
     console.log(props.status);
     //let [team] = useState([props.status.team])
-    let classType = "black details";
+    // let classType = "details";
     const history = useHistory();
     // if (props.status.isWhite){
-    //     className = "white " + className;
+    //     classType = "white " + classType;
     // } else {
-    //     className = "black " + className;
+    //     classType = "black " + classType;
     // }
 
     // useEffect(() => {
@@ -43,13 +43,14 @@ const Details = props => {
             window.alert(err.response.data.errMessage)
         })
     }
+
     const newGame = () => {
         history.push('/');
     }
 
 
     return ( 
-        <div className={classType}>  
+        <div className="details" >  
             {props.status.active ? <h2>It is {props.status.playerName}'s turn</h2> :
             <div>
                  <h1 className="check">GAME OVER</h1>

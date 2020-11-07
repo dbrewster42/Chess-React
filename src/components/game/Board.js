@@ -3,6 +3,7 @@ import "./Board.css"
 import DataService from '../../service/DataService';
 import Details from '../Details';
 import MovesList from '../MovesList';
+import Square from './Square';
 
 function importAll(r) {
     let images = {};
@@ -20,16 +21,15 @@ const Board = (props) => {
     let [start, setStart] = useState(88);
 //    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
-    let [status, setStatus] = useState(props.data[64])
+    let [status, setStatus] = useState(props.data[64]);
     //let [errorMessage, setErrorMessage] = useState('');
     console.log(status);
     const [moves, setMoves] = useState([]);
-    // let [move, setMove] = useState({});
-    // const [data] = useState([...props.data]);  
-    // const [otherData, setOtherData] = useState([])
+    //let [clicked, setClicked] = useState(false);
+    //let [squareStyle] = useState('squares ');
+    //let [squareType, setSquareType] = useState("squares ");
     
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
-    
     
     const updateMovesList = () => {        
         DataService.displayMoves()
@@ -44,35 +44,37 @@ const Board = (props) => {
 
     function Row(i){
         const newRow = [];
-        let count = i * 8;        
-        for (let j = 0; j<8; j++){
-            if ((i + j) % 2 === 1){                
-                newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined }>
-                   { (props.data[count].name != null) &&
-                        <img src={images[props.data[count].name]}
-                        className="icons"
-                        alt="chess piece" />    
-                    }                    
-                </div>)
-            }else {
-                newRow.push(<div key={count} id={i * 10 + j} className="squares y" onClick={isMove ? selectMove : props.data[count].name !== null ? selectPiece : undefined  }>
-                     { (props.data[count].name != null) &&
-                        <img src={images[props.data[count].name]}
-                        className="icons"
-                        alt="chess piece" />    
-                    }
-                </div>)
+        let count = i * 8;  
+        for (let j = 0; j<8; j++){ 
+            let image = '';
+            let thisPiece =  props.data[count].name;
+            let squareStyle = "squares y"
+            if (thisPiece != null){
+                image = images[thisPiece];
             }
-            count++;
-            
+            if ((i + j) % 2 === 1){
+                squareStyle = "squares g"
+            }        
+            newRow.push(
+                <Square 
+                    key={count}
+                    i={i} 
+                    j={j} 
+                    squareStyle={squareStyle}
+                    count={count} 
+                    thisPiece={thisPiece}
+                    image={image}
+                    isMove={isMove} 
+                    selectPiece={selectPiece}
+                    selectMove={selectMove} 
+                />
+            )            
+            count++;            
         }
         return <div className="rows" key={i}>{newRow}</div>;
     }
-    //newRow.push(<div key={count} id={i * 10 + j} className="squares g" onClick={isMove ? selectMove : (props.data[count].name != null && hasPiece(props.data[count].name)) ? selectPiece : undefined }></div>
-    //(props.data[count].name != null && props.data[count].isWhite == isWhite))
 
-    function Column(){
-        // console.log("row", props.data)        
+    function Column(){        
         const Board = []        
         for (let i = 0; i<8; i++){
             Board.push(Row(i));            
@@ -82,17 +84,16 @@ const Board = (props) => {
 
     const unselect = () => {
         setIsMove(false);
+        //setClicked(false);
     }
 
     const selectPiece = e => {    
         console.log(e.currentTarget) 
         console.log("Selecting piece ", e.currentTarget.id)
-        console.log(e.currentTarget.count)
+        //console.log(e.currentTarget.count)
         let multiplier = parseInt(e.currentTarget.id / 10);
         let count = e.currentTarget.id - multiplier * 2 ;
         console.log(multiplier, "newCount", count)
-        // let count = e.currentTarget.count; 
-        // console.log(count);
         console.log(props.data[count]);        
         if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
             let numb = parseInt(e.currentTarget.id)               
@@ -100,20 +101,27 @@ const Board = (props) => {
             setIsMove(true);
         } else {
             console.log("That is not your piece!")
+            window.alert("That is not your piece!")
+            //****************ADD LOGIC HERE */
         }       
     }
 
     const selectMove = e => {
         //console.log(e.currentTarget)
         console.log("Moving to ", e.currentTarget.id);        
-        let end = parseInt(e.currentTarget.id);        
-        //console.log(end);
+        let end = parseInt(e.currentTarget.id); 
+        if (end === start){
+            setIsMove(false);
+            //unselect();
+            return;
+        }       
         const move = {
             start,
             end,
             isWhite
         }
         setIsMove(false);
+        //unselect();
         console.log(move);
         DataService.makeMove(move)
             .then(res => {
@@ -172,29 +180,34 @@ const Board = (props) => {
                 window.alert(err.response.data.errMessage)
             })
     }
-    // const showBoard = () => {
-    //     DataService.getBoard()
-    //         .then(res => {
-    //             console.log(res.data);
-    //             let newData = res.data;
-    //             setData([...newData]);
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
-    // useEffect (() => {
-    //     showBoard();
-    //  },[]); 
-    //  <MovesList updateMovesList={updateMovesList} /> 
+    const generateHeaders = vertical => {
+        let newHeader = [];
+        const rows = "abcdefgh"       
+        if (vertical){
+            for (let i =0; i< 8; i++){
+                newHeader.push(<div key={i} className="vsquare">{i + 1}</div>);
+            }            
+        } else {
+            for (let i =0; i< 8; i++){
+                newHeader.push(<div key={i} className="hsquare">{rows[i]}</div>);
+            } 
+        }   
+        return newHeader;
+    }
     
     return ( 
         <div id="main">  
             <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
-                 
-            <MovesList moves={moves} updateMovesList={updateMovesList} /> 
-            <div id="board">
-                {Column()}
-            </div>            
+            <div id="flexHolder">
+                <MovesList moves={moves} updateMovesList={updateMovesList} /> 
+                <div id="totalBoard">
+                    <div id="board">
+                        {Column()}
+                    </div> 
+                    <div id="vtag">{generateHeaders(true)}</div>                                                  
+                </div>            
+            </div>
+            <div id="htag">{generateHeaders(false)}</div>  
         </div>
         
      );
