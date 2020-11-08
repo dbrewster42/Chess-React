@@ -196,10 +196,9 @@ const Board = (props) => {
     }
     
     return ( 
-        <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
+        <div id="main">                       
             <div id="flexHolder">
-                <MovesList moves={moves} updateMovesList={updateMovesList} /> 
+                 <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />
                 <div id="totalBoard">
                     <div id="board">
                         {Column()}
@@ -207,7 +206,8 @@ const Board = (props) => {
                     <div id="vtag">{generateHeaders(true)}</div>                                                  
                 </div>            
             </div>
-            <div id="htag">{generateHeaders(false)}</div>  
+            <div id="htag">{generateHeaders(false)}</div>
+            <MovesList moves={moves} updateMovesList={updateMovesList} />   
         </div>
         
      );

@@ -8,6 +8,7 @@
     margin: 0px;
     padding: 3px;
     height: 1020px;
+    height: 100%;
 }
 #flexHolder {
     display: flex;
@@ -82,7 +83,8 @@
 }
 #totalBoard {
     display: inline-flex;
-    margin-left: 4%;
+    margin-left: 2%;
+    margin-top: 2%;
     width: 850px;
     height: 816px;
 }

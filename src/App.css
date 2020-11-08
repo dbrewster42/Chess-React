@@ -1,14 +1,3 @@
-.details {
-  text-align: center;
-  margin: 1%;
-  margin-left: 27%;
-  border: 2px solid royalblue;
-  height: 120px;
-  width: 40%;
-  background-color: black;
-  color: red;
-}
-
 .detailButtons {
   background-color: red;
   color: white;
@@ -38,18 +27,33 @@
   margin-left: 35%;
 }
 
-#mainMoves{
+.details {
+  text-align: center;
+  /* margin: 1%; */
+  margin: 2%;
+  margin-bottom: 0%;
+  /* margin-left: 27%;  
+  height: 120px;
+  width: 40%; */
   width: 20%;
+  height: 820px;
+  border: 2px solid royalblue;
+  background-color: black;
+  color: red;
+}
+
+#mainMoves{
+  width: 60%;
   margin-left: 2%;
   display: inline-block;
   margin-top: auto;
-  height: 820px;
+  height: 120px;
 }
 #movesList{
   overflow: scroll;
   width: 100%;
-  height: 20%;  
-  height: 800px;
+  /* height: 20%;   */
+  height: 120px;
   margin-right: .5%;
   /* margin-left: 2%; */
   background-color: slategray;
