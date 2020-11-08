@@ -199,13 +199,14 @@ const Board = (props) => {
         <div id="main">  
             <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
             <div id="flexHolder">
-                <MovesList moves={moves} updateMovesList={updateMovesList} /> 
+                
                 <div id="totalBoard">
+                    <div id="vtag">{generateHeaders(true)}</div>
                     <div id="board">
                         {Column()}
-                    </div> 
-                    <div id="vtag">{generateHeaders(true)}</div>                                                  
-                </div>            
+                    </div>                                                                       
+                </div>
+                <MovesList moves={moves} updateMovesList={updateMovesList} />             
             </div>
             <div id="htag">{generateHeaders(false)}</div>  
         </div>

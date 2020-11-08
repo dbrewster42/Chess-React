@@ -52,8 +52,9 @@ const Details = props => {
     return ( 
         <div className="details" >  
             {props.status.active ? <h2>It is {props.status.playerName}'s turn</h2> :
-            <div>
-                 <h1 className="check">GAME OVER</h1>
+            <div>               
+                 <h1 className="check">CHECKMATE!</h1>
+                 {props.status.message && <h2 className="check"> {props.status.message}</h2>}
             <button className="tooltip" onClick={restart}>RESTART<span className="tooltiptext">Play another game vs the same opponent</span></button>
             <button className="tooltip" onClick={newGame}>NEW GAME<span className="tooltiptext">Play a game vs a different opponent</span></button>
             </div>} 
