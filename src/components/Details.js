@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../App.css"
 import DataService from '../service/DataService';
 // import App from '../App.js';
@@ -6,14 +6,17 @@ import { useHistory } from 'react-router-dom';
 
 const Details = props => {
     console.log(props.status);
-    //let [team] = useState([props.status.team])
+    let [backGround, setBackGround] = useState("w details")
+
     // let classType = "details";
     const history = useHistory();
-    // if (props.status.isWhite){
-    //     classType = "white " + classType;
-    // } else {
-    //     classType = "black " + classType;
-    // }
+    if (props.status.white && backGround === "bl details"){
+        console.log("changing to white")
+        setBackGround("w details")
+    } else if (!props.status.white && backGround === "w details"){
+        console.log("changing to black")
+        setBackGround("bl details")
+    }
 
     // useEffect(() => {
     //         if (props.status.isWhite){
@@ -50,10 +53,10 @@ const Details = props => {
 
 
     return ( 
-        <div className="details" >  
+        <div className={backGround} >  
             {props.status.active ? <h2>It is {props.status.playerName}'s turn</h2> :
-            <div>
-                 <h1 className="check">GAME OVER</h1>
+            <div>              
+                 {props.status.message && <h1 className="check"> {props.status.message}</h1>}
             <button className="tooltip" onClick={restart}>RESTART<span className="tooltiptext">Play another game vs the same opponent</span></button>
             <button className="tooltip" onClick={newGame}>NEW GAME<span className="tooltiptext">Play a game vs a different opponent</span></button>
             </div>} 

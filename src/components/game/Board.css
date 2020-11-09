@@ -57,7 +57,7 @@
 #vtag {
     display: inline-flex;
     flex-direction: column;
-    width: 40px;
+    width: 20px;
     height: 816px;
     margin: 0px;
     margin-bottom: 1%;
@@ -68,11 +68,11 @@
     height: 20px;
     margin: 0px;
     display: flex;
-    margin-left: 29%;
+    margin-left: 8.5%;
 }
 
 #board {   
-    border: 1px solid royalblue;
+    border: 2px solid royalblue;
     display: inline-block;
     flex-direction: column;
     width: 800px;

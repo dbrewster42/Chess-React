@@ -2,11 +2,18 @@
   text-align: center;
   margin: 1%;
   margin-left: 27%;
-  border: 2px solid royalblue;
+  
   height: 120px;
-  width: 40%;
-  background-color: black;
+  width: 40%;  
   color: red;
+}
+.bl {
+  background-color: black;
+  border: 3px solid rgb(226, 217, 217);
+}
+.w {
+  background-color: rgb(226, 217, 217);
+  border: 3px solid black;
 }
 
 .detailButtons {
@@ -39,20 +46,22 @@
 }
 
 #mainMoves{
-  width: 20%;
+  width: 30%;
   margin-left: 2%;
   display: inline-block;
   margin-top: auto;
-  height: 820px;
+  height: 820px;  
+  border: 2px solid royalblue;
 }
 #movesList{
   overflow: scroll;
   width: 100%;
-  height: 20%;  
-  height: 800px;
-  margin-right: .5%;
-  /* margin-left: 2%; */
+  height: 100%;  
   background-color: slategray;
+  
+}
+#mHeader{
+  text-align: center;
 }
 
 .check{
