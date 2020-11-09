@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../App.css"
 
 const MovesList = props => {
@@ -13,11 +13,11 @@ const MovesList = props => {
                     <button className="detailButtons r" onClick={() => showDaMoves()}>Show Moves</button>
                 } */}
     return (         
-            <div id="mainMoves">
-                
+            <div id="mainMoves">                
                 {
                     props.moves.moves && 
                     <div id="movesList">
+                        <h4 id="mHeader">Moves</h4>                        
                         <ol>
                             {props.moves.moves.map((move, i) => {
                                 return <li key={i}>{move}</li>

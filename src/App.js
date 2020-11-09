@@ -28,23 +28,18 @@ function App() {
 
   const setTheBoard = data => {
     console.log("app", data);
-    setData([...data]);
-    //history.push("/game");
+    setData([...data]);    
   }
 
   return (
     <Router>
       <Header />      
-      <Switch>
-        
-
+      <Switch>   
+         
         <Route exact path="/">
           <Welcome setTheBoard={setTheBoard} />
         </Route>
 
-        {/* <Route exact path="/game">
-          <Board data={data} />
-        </Route>  */}
         <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} /> } />
 
       </Switch>
