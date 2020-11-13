@@ -11,7 +11,6 @@ import Board from "./components/game/Board"
 
 function App() {
   const [data, setData] = useState([]);
-  //const history = useHistory();
 
   // const showBoard = () => {
   //   DataService.getBoard()
@@ -22,9 +21,6 @@ function App() {
   //       })
   //       .catch(error => console.log(error))
   //   }
-  //   useEffect (() => {
-  //     showBoard();
-  //  },[]); 
 
   const setTheBoard = data => {
     console.log("app", data);
