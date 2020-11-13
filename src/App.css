@@ -1,12 +1,12 @@
 .details {
   text-align: center;
   margin: 1%;
-  margin-left: 27%;
-  
+  margin-left: 27%;  
   height: 120px;
   width: 40%;  
   color: red;
 }
+
 .bl {
   background-color: black;
   border: 3px solid rgb(226, 217, 217);

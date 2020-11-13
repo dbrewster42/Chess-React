@@ -4,11 +4,11 @@ import DataService from '../../service/DataService';
 import Details from '../Details';
 import MovesList from '../MovesList';
 import Square from './Square';
+import Modal from "react-modal";
 
 function importAll(r) {
     let images = {};
-    r.keys().forEach((item, index) => {
-        // console.log(item);
+    r.keys().forEach((item, index) => {        
         images[item.replace("./", "")] = r(item);
     });
     // console.log(images);
@@ -19,16 +19,18 @@ const Board = (props) => {
     //console.log(props.data)
     let [isMove, setIsMove] = useState(false);
     let [start, setStart] = useState(88);
-//    let [end, setEnd] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
     let [status, setStatus] = useState(props.data[64]);
-    //let [errorMessage, setErrorMessage] = useState('');
+    let [errorMessage, setErrorMessage] = useState('');
     console.log(status);
     const [moves, setMoves] = useState([]);
-    //let [clicked, setClicked] = useState(false);
-    //let [squareStyle] = useState('squares ');
-    //let [squareType, setSquareType] = useState("squares ");
-    
+    let [showModal, setShowModal] = useState(false);
+    if (props.status.message){
+        toggleModal(props.status.message)
+    }
+    if (props.status.check){
+        toggleModal("CHECK!")
+    }
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
     
     const updateMovesList = () => {        
@@ -87,6 +89,15 @@ const Board = (props) => {
         //setClicked(false);
     }
 
+    const toggleModal = message => {
+        setErrorMessage(message);
+        setShowModal(true);
+        setTimeout(function(){
+            setShowModal(false)
+        }, (3 * 1000))
+        
+    }
+
     const selectPiece = e => {    
         console.log(e.currentTarget) 
         console.log("Selecting piece ", e.currentTarget.id)
@@ -100,9 +111,9 @@ const Board = (props) => {
             setStart(numb);
             setIsMove(true);
         } else {
-            console.log("That is not your piece!")
-            window.alert("That is not your piece!")
-            //****************ADD LOGIC HERE */
+            console.log("That is not your piece!");
+            toggleModal("That is not your piece!");
+            //window.alert("That is not your piece!");            
         }       
     }
 
@@ -135,7 +146,8 @@ const Board = (props) => {
             .catch(err => {
                 console.log(err)
                 console.log(err.response.data)
-                window.alert(err.response.data.errMessage)
+                toggleModal(err.response.data.errMessage)
+                //window.alert(err.response.data.errMessage)
                 //setErrorMessage(err.response.data.errMessage)
             })
     }
@@ -159,7 +171,8 @@ const Board = (props) => {
             .catch(err => {
                 console.log(err)
                 console.log(err.response.data)
-                window.alert(err.response.data.errMessage)       
+                //window.alert(err.response.data.errMessage) 
+                toggleModal(err.response.data.errMessage)      
             })
 
     }
@@ -177,7 +190,8 @@ const Board = (props) => {
             })
             .catch(err => {
                 console.log(err);
-                window.alert(err.response.data.errMessage)
+                //window.alert(err.response.data.errMessage)
+                toggleModal(err.response.data.errMessage) 
             })
     }
     const generateHeaders = vertical => {
@@ -198,11 +212,14 @@ const Board = (props) => {
     return ( 
         <div id="main">  
             <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
-            <div id="flexHolder">
-                
+            <div id="flexHolder">                
                 <div id="totalBoard">
                     <div id="vtag">{generateHeaders(true)}</div>
                     <div id="board">
+                        <Modal isOpen={showModal} id="model">
+                            <h1 id="error">{errorMessage}</h1> 
+                            <button id="button" onClick={() => setShowModal(false)}>Okay</button>
+                        </Modal>
                         {Column()}
                     </div>                                                                       
                 </div>
