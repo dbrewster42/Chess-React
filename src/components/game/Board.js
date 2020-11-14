@@ -88,8 +88,7 @@ const Board = (props) => {
     }
 
     const unselect = () => {
-        setIsMove(false);
-        //setClicked(false);
+        setIsMove(false);        
     }
 
     function toggleModal(message){
@@ -103,30 +102,25 @@ const Board = (props) => {
 
     const selectPiece = e => {    
         console.log(e.currentTarget) 
-        console.log("Selecting piece ", e.currentTarget.id)
-        //console.log(e.currentTarget.count)
+        //console.log("Selecting piece ", e.currentTarget.id)        
         let multiplier = parseInt(e.currentTarget.id / 10);
         let count = e.currentTarget.id - multiplier * 2 ;
-        console.log(multiplier, "newCount", count)
-        console.log(props.data[count]);        
+        //console.log(multiplier, "newCount", count)          
         if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
             let numb = parseInt(e.currentTarget.id)               
             setStart(numb);
             setIsMove(true);
         } else {
             console.log("That is not your piece!");
-            toggleModal("That is not your piece!");
-            //window.alert("That is not your piece!");            
+            toggleModal("That is not your piece!");                       
         }       
     }
 
-    const selectMove = e => {
-        //console.log(e.currentTarget)
+    const selectMove = e => {       
         console.log("Moving to ", e.currentTarget.id);        
         let end = parseInt(e.currentTarget.id); 
         if (end === start){
-            setIsMove(false);
-            //unselect();
+            setIsMove(false);            
             return;
         }       
         const move = {
@@ -134,8 +128,7 @@ const Board = (props) => {
             end,
             isWhite
         }
-        setIsMove(false);        
-        //unselect();
+        setIsMove(false);     
         console.log(move);
         DataService.makeMove(move)
             .then(res => {
@@ -165,9 +158,9 @@ const Board = (props) => {
             .then(res => {
                 setIsWhite((prev) => !prev);
                 props.setTheBoard(res.data);
-                setStatus(res.data[64]);
-                //setErrorMessage('');
+                setStatus(res.data[64]);                
                 updateMovesList();
+                setShowCheck(true);
             })
             .catch(err => {                
                 console.log(err.response.data);
