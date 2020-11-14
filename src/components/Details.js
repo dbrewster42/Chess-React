@@ -5,9 +5,10 @@ import DataService from '../service/DataService';
 import { useHistory } from 'react-router-dom';
 
 const Details = props => {
-    console.log(props.status);
+    //console.log(props.status);
     let [backGround, setBackGround] = useState("w details")
     const history = useHistory();
+    
     if (props.status.white && backGround === "bl details"){
         //console.log("changing to white")
         setBackGround("w details")
@@ -15,6 +16,14 @@ const Details = props => {
         //console.log("changing to black")
         setBackGround("bl details")
     }
+    // if (!props.status.active && showCheck){
+    //     setShowCheck(false);
+    //     props.toggleModal(props.status.message)
+    // }
+    // if (props.status.check && showCheck){
+    //     setShowCheck(false);
+    //     props.toggleModal("CHECK!")
+    // }
     // const countPieces = team => {
     //     // team.map((piece, i).filter(piece.name) => {
     //     //     <div key={i} className="squares"></div>

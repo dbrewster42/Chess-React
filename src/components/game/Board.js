@@ -8,35 +8,38 @@ import Modal from "react-modal";
 
 function importAll(r) {
     let images = {};
-    r.keys().forEach((item, index) => {        
+    r.keys().forEach((item) => {        
         images[item.replace("./", "")] = r(item);
     });
     // console.log(images);
     return images;
   }
 
-const Board = (props) => {    
-    //console.log(props.data)
+const Board = (props) => {  
     let [isMove, setIsMove] = useState(false);
     let [start, setStart] = useState(88);
     let [isWhite, setIsWhite] = useState(true);
     let [status, setStatus] = useState(props.data[64]);
     let [errorMessage, setErrorMessage] = useState('');
-    console.log(status);
+    //console.log(status);
     const [moves, setMoves] = useState([]);
     let [showModal, setShowModal] = useState(false);
-    if (props.status.message){
-        toggleModal(props.status.message)
-    }
-    if (props.status.check){
-        toggleModal("CHECK!")
-    }
+    let [showCheck, setShowCheck] = useState(true);
+    
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
     
+    if (!status.active && showCheck){
+        setShowCheck(false);
+        toggleModal(status.message);
+    } else if (status.check && showCheck){
+        setShowCheck(false);
+        toggleModal("CHECK!");
+    }
+
     const updateMovesList = () => {        
         DataService.displayMoves()
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 setMoves(res.data);
             })
             .catch(err => {
@@ -85,45 +88,39 @@ const Board = (props) => {
     }
 
     const unselect = () => {
-        setIsMove(false);
-        //setClicked(false);
+        setIsMove(false);        
     }
 
-    const toggleModal = message => {
+    function toggleModal(message){
         setErrorMessage(message);
         setShowModal(true);
         setTimeout(function(){
             setShowModal(false)
-        }, (3 * 1000))
+        }, (2500))
         
     }
 
     const selectPiece = e => {    
         console.log(e.currentTarget) 
-        console.log("Selecting piece ", e.currentTarget.id)
-        //console.log(e.currentTarget.count)
+        //console.log("Selecting piece ", e.currentTarget.id)        
         let multiplier = parseInt(e.currentTarget.id / 10);
         let count = e.currentTarget.id - multiplier * 2 ;
-        console.log(multiplier, "newCount", count)
-        console.log(props.data[count]);        
+        //console.log(multiplier, "newCount", count)          
         if ((props.data[count].name.startsWith("w") && isWhite) || (props.data[count].name.startsWith("b") && !isWhite)){
             let numb = parseInt(e.currentTarget.id)               
             setStart(numb);
             setIsMove(true);
         } else {
             console.log("That is not your piece!");
-            toggleModal("That is not your piece!");
-            //window.alert("That is not your piece!");            
+            toggleModal("That is not your piece!");                       
         }       
     }
 
-    const selectMove = e => {
-        //console.log(e.currentTarget)
+    const selectMove = e => {       
         console.log("Moving to ", e.currentTarget.id);        
         let end = parseInt(e.currentTarget.id); 
         if (end === start){
-            setIsMove(false);
-            //unselect();
+            setIsMove(false);            
             return;
         }       
         const move = {
@@ -131,24 +128,21 @@ const Board = (props) => {
             end,
             isWhite
         }
-        setIsMove(false);
-        //unselect();
+        setIsMove(false);     
         console.log(move);
         DataService.makeMove(move)
             .then(res => {
                 //console.log(res.data);
                 setIsWhite((prev) => !prev);                
                 props.setTheBoard(res.data);
-                setStatus(res.data[64]);
-                //setErrorMessage('');
+                setStatus(res.data[64]);                
                 updateMovesList();
+                setShowCheck(true);
             })
-            .catch(err => {
-                console.log(err)
+            .catch(err => {                
                 console.log(err.response.data)
                 toggleModal(err.response.data.errMessage)
-                //window.alert(err.response.data.errMessage)
-                //setErrorMessage(err.response.data.errMessage)
+                //window.alert(err.response.data.errMessage)                
             })
     }
     const specialMove = () => {
@@ -164,15 +158,14 @@ const Board = (props) => {
             .then(res => {
                 setIsWhite((prev) => !prev);
                 props.setTheBoard(res.data);
-                setStatus(res.data[64]);
-                //setErrorMessage('');
+                setStatus(res.data[64]);                
                 updateMovesList();
+                setShowCheck(true);
             })
-            .catch(err => {
-                console.log(err)
-                console.log(err.response.data)
+            .catch(err => {                
+                console.log(err.response.data);
                 //window.alert(err.response.data.errMessage) 
-                toggleModal(err.response.data.errMessage)      
+                toggleModal(err.response.data.errMessage);      
             })
 
     }

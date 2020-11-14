@@ -24,9 +24,9 @@ const Welcome = props => {
             <h1>Rules</h1> 
             <div id="body">         
                 <div id="left">
-                    <h2 className="blues">Specific Game Rules</h2>
+                    <h2 className="blues">Specific Gameplay Rules</h2>
 
-                    <p>Click on a piece to select it. Two new options will pop up in the header- Unselect and Special Move. If you wish to select a different piece, 
+                    <p>Click on a piece to select it. The tile will turn blue to confirm that you have selected the piece. Two new options will pop up in the header- Unselect and Special Move. If you wish to select a different piece, 
                         click on unselect or click the piece again. If you wish to perform a Castle, click on your <strong>Rook</strong> and then click Special Move; if the conditions for Castling are valid, then 
                         the program will Castle for you. If you wish to perform en Passant, click on the Pawn you wish to use and then click on Special Move. The program will
                         perform the special move for you if the conditions are valid. See below for proper Castling and en Passant conditions. <br></br>
@@ -53,7 +53,7 @@ const Welcome = props => {
                         <li>Stalemate- The game will check to see if stalemate applies. If so, it will be declared a draw</li>
                     </ul>
                     <ul> <strong>During Move Selection</strong>    
-                        <li>333- Castles (the proper Rook must be selected)</li>
+                        <li>333- Castles (the proper <em>Rook</em>  must be selected)</li>
                         <li>111- En Passant (the proper Pawn must be selected)</li>
                     </ul>
 
@@ -86,8 +86,7 @@ const Welcome = props => {
                         ends the game in a draw.</p>
 
                     <br></br>
-                    <h2 className="blues">Rules for each Piece's Movement</h2>
-                    <p>These are 100% followed. Any invalid movement will be caught and not implemented</p>
+                    <h2 className="blues">Rules for each Piece's Movement</h2>                    
                     <ul>
                         <li><strong>King</strong> can move exactly one square horizontally, vertically, or diagonally. Once in every game, each king is allowed to make a special move, known as castling.</li>
                         <li><strong>Queen</strong> can move any number of vacant squares diagonally, horizontally, or vertically.</li>
