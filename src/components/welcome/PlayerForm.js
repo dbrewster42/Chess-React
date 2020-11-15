@@ -5,20 +5,19 @@ import DataService from '../../service/DataService';
 
 const PlayerForm = props => {
     //console.log("PF", props)
-    const [name, setName] = useState("Your Name Here");
-    const [undo, setUndo] = useState(true);
+    const [name, setName] = useState("Mr. Magoo");
     const [names] = useState([])
     const [player, setPlayer] = useState(1);
+    let [isChecked, setIsChecked] = useState(true);
     const history = useHistory();
 
     const handleChange = e => {               
         setName(e.target.value);
     }   
 
-    const handleUndo = e => {
-        console.log(e);
-        console.log(e.target.value);
-        setUndo((prev) => !prev);
+    const handleUndo = e => {        
+        console.log(e.target);
+        setIsChecked((prev) => !prev);
     }
 
     const addPlayers = body => {        
@@ -55,7 +54,7 @@ const PlayerForm = props => {
         <form onSubmit={makePlayer}>
             Player {player}, Please Enter Your Name <br></br>
             <input type="text" name="name" onChange={handleChange} value={name} /><br></br>
-            <label>Include an Undo option</label><input type="checkbox" name="undo" onChange={handleUndo} checked />
+            <label>Include an Undo option</label><input type="checkbox" name="undo" onChange={handleUndo} checked={isChecked} />
             <br></br>
             <input type="submit" value="Submit" />
         </form>

@@ -33,6 +33,7 @@ const MovesList = props => {
                     <div className="movesList">
                         <h3 className="mHeader click" onClick={toggleMove}>Instructions<span className="tooltiptext">Click here to show made moves</span></h3>  
                         <p>Confused about the gameplay? Confused about the rules? Check it here at any time by clicking on the above title</p>
+                        <br></br>
                         <h4 className="mHeader">Gameplay</h4> 
                         <p>Remember to hit the <strong>Special Move</strong> button after selecting a <strong>Rook</strong> to perform a <em>Castle</em> or with a Pawn to use <em>en Passant</em>!  </p>
                         <p>Click on a piece to select it. The tile will turn blue to confirm that you have selected the piece. Also, the two buttons in the header will change to give you two new options- Unselect and Special Move. If you wish to select a different piece, 
@@ -41,7 +42,7 @@ const MovesList = props => {
                         perform the special move for you if the conditions are valid. See below for proper Castling and en Passant conditions. <br></br>
                         </p>
                         <p>This game does not yet include stalemate. If you find yourself in stalemate, please click the 'Draw' button!</p>
-
+                        <br></br>
                         <h4 className="mHeader">General Chess Rules</h4>
 
                         <p>White is always first to move and players take turns alternately moving one piece at a time. A movement is required each turn. 

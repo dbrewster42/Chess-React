@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PlayerForm from "./PlayerForm"
 import "./Welcome.css"
 import pic from "../header/4.jpg"
+import pic2 from "../header/2.jpg"
 
 const Welcome = props => {
     //console.log("Welcome to the ", props)
@@ -82,7 +83,8 @@ const Welcome = props => {
                     <div id="lean">
                          <h2 className="blue">Play a Game Now</h2>
                         <PlayerForm setTheBoard={props.setTheBoard} />
-                        </div>
+                        <img className="im2" src={pic2} alt="pic" /> 
+                    </div>
                     
                 </div>
                 

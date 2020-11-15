@@ -30,13 +30,13 @@
     background-color: #8f4306;
 }
 .g:hover {
-    background-color: limegreen;
+    background-color: rgb(65, 65, 236);
 }
 .y {    
     background-color: burlywood;
 }
 .y:hover {
-    background-color: limegreen;
+    background-color: rgb(52, 115, 136);
 }
 .icons {    
     height: 90px;
