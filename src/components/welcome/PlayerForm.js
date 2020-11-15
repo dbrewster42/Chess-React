@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import "./PF.css"
+import "./Welcome.css"
 import { withRouter, useHistory } from 'react-router-dom';
 import DataService from '../../service/DataService';
 
 const PlayerForm = props => {
     //console.log("PF", props)
-    const [name, setName] = useState("Your Name");
+    const [name, setName] = useState("Your Name Here");
+    const [undo, setUndo] = useState(true);
     const [names] = useState([])
     const [player, setPlayer] = useState(1);
     const history = useHistory();
@@ -14,13 +15,18 @@ const PlayerForm = props => {
         setName(e.target.value);
     }   
 
+    const handleUndo = e => {
+        console.log(e);
+        console.log(e.target.value);
+        setUndo((prev) => !prev);
+    }
+
     const addPlayers = body => {        
         console.log(body)
         DataService.createPlayers(body)
         .then(res => {
             console.log("added player", res);
-            props.setTheBoard(res.data);            
-            //props.history.push('/game')
+            props.setTheBoard(res.data);          
             history.push('/game');
         })
         .catch(err => {
@@ -49,6 +55,8 @@ const PlayerForm = props => {
         <form onSubmit={makePlayer}>
             Player {player}, Please Enter Your Name <br></br>
             <input type="text" name="name" onChange={handleChange} value={name} /><br></br>
+            <label>Include an Undo option</label><input type="checkbox" name="undo" onChange={handleUndo} checked />
+            <br></br>
             <input type="submit" value="Submit" />
         </form>
      );

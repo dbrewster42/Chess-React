@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PlayerForm from "./PlayerForm"
 import "./Welcome.css"
+import pic from "../header/4.jpg"
 
 const Welcome = props => {
     //console.log("Welcome to the ", props)
@@ -42,20 +43,27 @@ const Welcome = props => {
 
                     <br></br>
                     <h2 className="blues">Special Functionalities</h2>
-                    <ul><strong>Any Time During Turn</strong>
-                        <li>Piece Count- Will Display a Count of All Piece Types from Both Team</li>
-                        <li>Display Moves- Prints a List of All Moves</li>                        
-                    </ul>
-                    <ul> <strong>During Piece Selection</strong>
-                        
-                        <li>Undo- Undoes last round of moves</li>
+                    <ul><strong>During Piece Selection</strong>
                         <li>Forfeit- Forfeits the game</li>
-                        <li>Stalemate- The game will check to see if stalemate applies. If so, it will be declared a draw</li>
+                        <li>Draw - Checks for stalemate, if not stalemate, then it requires the other team to agree </li>
+                        <li>Piece Count- Will Display a Count of All Piece Types from Both Team</li>
+                        <li>Toggle between Moves and Instructions</li>
+                        <ul>
+                            <li>Display Moves- Prints a List of All Moves</li>  
+                            <li>Display Rules - Prints the basic instructions of how to play Chess including specific gameplay</li>
+                        </ul>
+                        <li>Undo (Optional)- Undoes your last move</li>                                              
                     </ul>
-                    <ul> <strong>During Move Selection</strong>    
-                        <li>333- Castles (the proper <em>Rook</em>  must be selected)</li>
-                        <li>111- En Passant (the proper Pawn must be selected)</li>
+                    <ul> <strong>During Move Selection</strong>
+                        <li>Unselect - unselects the current piece</li>
+                        <li>Special Move - executes a Special Move if conditions are valid</li>     
+                        <ul> 
+                            <li>Castle - the proper <em>Rook</em>  must be selected</li>
+                            <li>En Passant - the proper Pawn must be selected</li>
+                        </ul>                   
+                        
                     </ul>
+                    
 
                     <br></br>
                     <h2 className="blues">Game Status(es)</h2>
@@ -67,8 +75,15 @@ const Welcome = props => {
                         <li>Stalemate (not included)</li>
                     </ul>
                     <br></br>
-                    <h2 className="blues">Play a Game Now</h2>
-                    <PlayerForm setTheBoard={props.setTheBoard} />
+                    <img className="image" src={pic} alt="pic" /> 
+                    
+                   
+                    
+                    <div id="lean">
+                         <h2 className="blue">Play a Game Now</h2>
+                        <PlayerForm setTheBoard={props.setTheBoard} />
+                        </div>
+                    
                 </div>
                 
                 <div id="right">

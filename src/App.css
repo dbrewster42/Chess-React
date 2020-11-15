@@ -60,6 +60,11 @@
   background-color: slategray;
   
 }
+.movesList p {
+  width: 90%;
+  margin: auto;
+}
+
 .mHeader{
   text-align: center;
 }

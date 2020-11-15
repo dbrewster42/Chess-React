@@ -34,8 +34,14 @@ const MovesList = props => {
                         <h3 className="mHeader click" onClick={toggleMove}>Instructions<span className="tooltiptext">Click here to show made moves</span></h3>  
                         <p>Confused about the gameplay? Confused about the rules? Check it here at any time by clicking on the above title</p>
                         <h4 className="mHeader">Gameplay</h4> 
-                        <p>Remember to hit the <strong>Special Move</strong> button to perform a <em>Castle</em> or <em>en Passant</em>!  </p>
+                        <p>Remember to hit the <strong>Special Move</strong> button after selecting a <strong>Rook</strong> to perform a <em>Castle</em> or with a Pawn to use <em>en Passant</em>!  </p>
+                        <p>Click on a piece to select it. The tile will turn blue to confirm that you have selected the piece. Also, the two buttons in the header will change to give you two new options- Unselect and Special Move. If you wish to select a different piece, 
+                        click on unselect (or you can also click the piece again). If you are not making a special move, you simply click your desired destination. If you wish to perform a Castle, click on your <strong>Rook</strong> and then click Special Move; if the conditions for Castling are valid, then 
+                        the program will Castle for you. If you wish to perform en Passant, click on the Pawn you wish to use and then click on Special Move. The program will
+                        perform the special move for you if the conditions are valid. See below for proper Castling and en Passant conditions. <br></br>
+                        </p>
                         <p>This game does not yet include stalemate. If you find yourself in stalemate, please click the 'Draw' button!</p>
+
                         <h4 className="mHeader">General Chess Rules</h4>
 
                         <p>White is always first to move and players take turns alternately moving one piece at a time. A movement is required each turn. 
@@ -71,7 +77,7 @@ const MovesList = props => {
                             <li><strong>En Passant</strong> may only be used if the capturing pawn must be on its fifth rank. The threatened pawn must have moved two squares from its starting square, and be on an adjacent file.</li>                
                             <li><strong>Castle</strong> may only be used if the king has never moved, the rook involved has never moved, the squares between the king and the rook involved are unoccupied, the king is not in check, and the king does not cross over or end on a square attacked by an enemy piece.</li>
                             <li><strong>Pawn Promotion</strong> is when a pawn makes it to the other side of the board. Upon reaching the back row, the pawn becomes a queen</li>
-                            <li>Undo</li>
+                            <li>Undo (Optional)</li>
                         </ul>   
                     </div>                       
                 }                
