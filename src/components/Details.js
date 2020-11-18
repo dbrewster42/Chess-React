@@ -5,9 +5,10 @@ import DataService from '../service/DataService';
 import { useHistory } from 'react-router-dom';
 
 const Details = props => {
-    //console.log(props.status);
+    console.log(props.status);
     let [backGround, setBackGround] = useState("w details")
     const history = useHistory();
+    //const [allowUndo] = useState(props.undo);
     
     if (props.status.white && backGround === "bl details"){
         //console.log("changing to white")
@@ -32,12 +33,25 @@ const Details = props => {
 
     //     }
     // };{countPieces(props.status.team)}
+    const undo = () => {
+        DataService.undo()
+        .then(res => {
+            console.log(res);
+            props.setTheBoard(res.data);
+            props.changeTurn();
+        })
+        .catch(err => {
+            console.log(err);
+            window.alert(err.response.data.errMessage)
+        })
+    }
     
     const restart = () => {
         DataService.restartGame()
         .then(res => {
             console.log(res);
             props.setTheBoard(res.data);
+            props.changeTurn(true);
         })
         .catch(err => {
             console.log(err);
@@ -65,7 +79,7 @@ const Details = props => {
             <div>                
                 {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={() => props.endTheGame(true)}>Forfeit</button> }
                 {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={() => props.endTheGame(false)}>Draw</button> } 
-                {props.isMove ? <button className="detailButtons">Toggle Sidebar</button> : <button className="detailButtons">Undo</button> }                
+                {props.isMove ? <button className="detailButtons">Toggle Sidebar</button> : props.undo && <button className="detailButtons" onClick={() => undo()}>Undo</button> }                
                 {props.status.check && <h1 className="check">You must move out of check!</h1>}                
             </div> }
             

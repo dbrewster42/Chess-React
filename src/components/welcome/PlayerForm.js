@@ -24,6 +24,9 @@ const PlayerForm = props => {
         console.log(body)
         DataService.createPlayers(body)
         .then(res => {
+            if (isChecked){
+                props.toggleUndo();
+            }
             console.log("added player", res);
             props.setTheBoard(res.data);          
             history.push('/game');
@@ -36,12 +39,14 @@ const PlayerForm = props => {
     const makePlayer = (e) => {
         e.preventDefault(); 
         console.log(e.target.name.value);
+        console.log(isChecked);
         names.push(e.target.name.value);        
         if (player === 2){
             const body = {                
                 name1: names[0], 
                 name2: names[1]
             }
+
             addPlayers(body);
             setPlayer(player-2);                   
         }

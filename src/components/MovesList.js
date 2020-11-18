@@ -11,13 +11,14 @@ const MovesList = props => {
         } 
     } 
       
-
     const toggleMove = () => {
         if (props.moves.moves){
             setShowMoves((prev) => !prev);
-        }        
-        console.log("No Moves Yet!!")
+        } else {
+            console.log("No Moves Yet!!")
+        }   
     }
+
     return (         
             <div id="mainMoves">                
                 {showMoves ?            
@@ -78,7 +79,7 @@ const MovesList = props => {
                             <li><strong>En Passant</strong> may only be used if the capturing pawn must be on its fifth rank. The threatened pawn must have moved two squares from its starting square, and be on an adjacent file.</li>                
                             <li><strong>Castle</strong> may only be used if the king has never moved, the rook involved has never moved, the squares between the king and the rook involved are unoccupied, the king is not in check, and the king does not cross over or end on a square attacked by an enemy piece.</li>
                             <li><strong>Pawn Promotion</strong> is when a pawn makes it to the other side of the board. Upon reaching the back row, the pawn becomes a queen</li>
-                            <li>Undo (Optional)</li>
+                            <li><strong>Undo</strong> (Optional)- Both players must accept to use. You must select undo <em>before</em> your opponent takes a turn</li>
                         </ul>   
                     </div>                       
                 }                

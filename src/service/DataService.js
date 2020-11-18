@@ -3,15 +3,8 @@ import axios from 'axios'
 //const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = 'http://localhost:8080/game';
 
-class DataService {
-    
-    // getBoard(){
-    //     return axios.get(`${url}`);
-    // }
+class DataService {    
 
-    // getStatus(){
-    //     return axios.get(`${url}/status`)
-    // }
     restartGame(){
         return axios.post(`${url}/restart`);
     }
@@ -30,6 +23,10 @@ class DataService {
 
     endGame(endRequest){
         return axios.post(`${url}/end`, endRequest);
+    }
+
+    undo(){
+        return axios.post(`${url}/undo`);
     }
    
 }

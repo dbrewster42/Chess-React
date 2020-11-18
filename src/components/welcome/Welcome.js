@@ -17,7 +17,7 @@ const Welcome = props => {
             {/* <Link to="/game"><h1 className="start">Click Here to Begin</h1></Link> */}
             <h1 className="start" onClick={toggleForm}>{">>>>>>>>>"} Start A Game {"<<<<<<<<<<"} </h1>
             {showsForm ? 
-            <PlayerForm setTheBoard={props.setTheBoard} />
+            <PlayerForm setTheBoard={props.setTheBoard} toggleUndo={props.toggleUndo} />
             : 
             <i></i>
             }
@@ -81,7 +81,7 @@ const Welcome = props => {
                    
                     
                     <div id="lean">
-                         <h2 className="blue">Play a Game Now</h2>
+                        <h2 className="blue">Play a Game Now</h2>
                         <PlayerForm setTheBoard={props.setTheBoard} />
                         <img className="im2" src={pic2} alt="pic" /> 
                     </div>

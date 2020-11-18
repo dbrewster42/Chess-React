@@ -11,6 +11,7 @@ import Board from "./components/game/Board"
 
 function App() {
   const [data, setData] = useState([]);
+  const [undo, setUndo] = useState(false);
 
   // const showBoard = () => {
   //   DataService.getBoard()
@@ -21,6 +22,9 @@ function App() {
   //       })
   //       .catch(error => console.log(error))
   //   }
+  const toggleUndo = () => {
+    setUndo(true);
+  }
 
   const setTheBoard = data => {
     console.log("app", data);
@@ -33,10 +37,10 @@ function App() {
       <Switch>   
          
         <Route exact path="/">
-          <Welcome setTheBoard={setTheBoard} />
+          <Welcome setTheBoard={setTheBoard} toggleUndo={toggleUndo} />
         </Route>
 
-        <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} /> } />
+        <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} undo={undo} /> } />
 
       </Switch>
     </Router>

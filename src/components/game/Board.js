@@ -21,10 +21,11 @@ const Board = (props) => {
     let [isWhite, setIsWhite] = useState(true);
     let [status, setStatus] = useState(props.data[64]);
     let [errorMessage, setErrorMessage] = useState('');
-    //console.log(status);
     const [moves, setMoves] = useState([]);
     let [showModal, setShowModal] = useState(false);
     let [showCheck, setShowCheck] = useState(true);
+    const [undo] = useState(props.undo);
+    //console.log(status);
     
     const images = importAll(require.context("../../../public/pics", false, /\.(pn?g)$/));
     
@@ -89,6 +90,13 @@ const Board = (props) => {
 
     const unselect = () => {
         setIsMove(false);        
+    }
+    const changeTurn = (white = false) => {
+        if (white){
+            setIsWhite(true)
+        } else {
+            setIsWhite((prev) => !prev);
+        }        
     }
 
     function toggleModal(message){
@@ -204,12 +212,12 @@ const Board = (props) => {
     
     return ( 
         <div id="main">  
-            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} />                                
+            <Details status={status} isMove={isMove} unselect={unselect} specialMove={specialMove} endTheGame={endTheGame} setTheBoard={props.setTheBoard} undo={undo} changeTurn={changeTurn} />                                
             <div id="flexHolder">                
                 <div id="totalBoard">
                     <div id="vtag">{generateHeaders(true)}</div>
                     <div id="board">
-                        <Modal isOpen={showModal} id="model">
+                        <Modal isOpen={showModal} id="model" ariaHideApp={false}>
                             <h1 id="error">{errorMessage}</h1> 
                             <button id="button" onClick={() => setShowModal(false)}>Okay</button>
                         </Modal>

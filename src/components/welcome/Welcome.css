@@ -47,13 +47,13 @@ p {
 
 .image{
     width: 50%;
-    height: 320px;
+    height: 250px;
     display: inline-block;
 }
 .im2 {
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 2%;
+    width: 98%;
+    /* margin-left: 5%; */
+    margin-top: 1%;
 }
 #lean {
     width: 50%;
