@@ -89,7 +89,7 @@
 .check{
   text-decoration: wavy;
   /* background-color: royalblue; */
-  width: 450px;
+  width: 100%;
   margin: auto;
   animation-name: check;
   animation-duration: 10s;

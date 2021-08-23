@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import "../App.css"
 import DataService from '../service/DataService';
-// import App from '../App.js';
 import { useHistory } from 'react-router-dom';
 
 const Details = props => {
-    console.log(props.status);
+    //console.log(props.status);
     let [backGround, setBackGround] = useState("w details")
     const history = useHistory();
-    //const [allowUndo] = useState(props.undo);
     
     if (props.status.white && backGround === "bl details"){
-        //console.log("changing to white")
         setBackGround("w details")
     } else if (!props.status.white && backGround === "w details"){
-        //console.log("changing to black")
         setBackGround("bl details")
     }
     // if (!props.status.active && showCheck){
@@ -34,7 +30,7 @@ const Details = props => {
     //     }
     // };{countPieces(props.status.team)}
     const undo = () => {
-        DataService.undo()
+        DataService.undo(props.gameId)
         .then(res => {
             console.log(res);
             props.setTheBoard(res.data);
@@ -47,11 +43,13 @@ const Details = props => {
     }
     
     const restart = () => {
-        DataService.restartGame()
+        DataService.restartGame(props.gameId)
         .then(res => {
             console.log(res);
             props.setTheBoard(res.data);
             props.changeTurn(true);
+            let newId = res.data[64].id;
+            history.push(`/game/${newId}`);
         })
         .catch(err => {
             console.log(err);
@@ -79,7 +77,7 @@ const Details = props => {
             <div>                
                 {props.isMove ? <button className="detailButtons" onClick={props.specialMove}>Special Move</button> : <button className="detailButtons" onClick={() => props.endTheGame(true)}>Forfeit</button> }
                 {props.isMove ? <button className="detailButtons" onClick={props.unselect}>Unselect Piece</button> : <button className="detailButtons" onClick={() => props.endTheGame(false)}>Draw</button> } 
-                {props.isMove ? <button className="detailButtons">Toggle Sidebar</button> : props.undo && <button className="detailButtons" onClick={() => undo()}>Undo</button> }                
+                {props.isMove ? <button className="detailButtons" onClick={props.toggleMove}>Toggle Sidebar</button> : props.undo && <button className="detailButtons" onClick={() => undo()}>Undo</button> }                
                 {props.status.check && <h1 className="check">You must move out of check!</h1>}                
             </div> }
             

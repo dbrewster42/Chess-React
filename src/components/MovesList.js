@@ -1,29 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../App.css"
 
 const MovesList = props => {
-    let [showMoves, setShowMoves] = useState(false);   
-    let [autoToggle, setAutoToggle] = useState(true);
-    if (autoToggle && props.moves.moves){
-        if (props.moves.moves.length === 4){
-            setShowMoves(true);
-            setAutoToggle(false)
-        } 
-    } 
-      
-    const toggleMove = () => {
-        if (props.moves.moves){
-            setShowMoves((prev) => !prev);
-        } else {
-            console.log("No Moves Yet!!")
-        }   
-    }
 
     return (         
             <div id="mainMoves">                
-                {showMoves ?            
+                {props.showMoves ?            
                     <div className="movesList">
-                        <h3 className="mHeader click" onClick={toggleMove}>Moves<span className="tooltiptext">Click Here to Show the Instructions</span></h3>                        
+                        <h3 className="mHeader click" onClick={props.toggleMove}>Moves<span className="tooltiptext">Click Here to Show the Instructions</span></h3>                        
                         <ol>
                             {props.moves.moves.map((move, i) => {
                                 return <li key={i}>{move}</li>
@@ -32,7 +16,7 @@ const MovesList = props => {
                     </div>
                     :
                     <div className="movesList">
-                        <h3 className="mHeader click" onClick={toggleMove}>Instructions<span className="tooltiptext">Click here to show made moves</span></h3>  
+                        <h3 className="mHeader click" onClick={props.toggleMove}>Instructions<span className="tooltiptext">Click here to show made moves</span></h3>  
                         <p>Confused about the gameplay? Confused about the rules? Check it here at any time by clicking on the above title</p>
                         <br></br>
                         <h4 className="mHeader">Gameplay</h4> 

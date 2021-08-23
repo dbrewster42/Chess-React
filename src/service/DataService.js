@@ -13,20 +13,20 @@ class DataService {
         return axios.post(`${url}/players`, body);
     }
 
-    makeMove(move){
-        return axios.post(`${url}`, move);
+    makeMove(move, id){
+        return axios.post(`${url}/${id}`, move);
     }
 
-    displayMoves(){
-        return axios.get(`${url}/moves`);
+    displayMoves(id){
+        return axios.get(`${url}/${id}/moves`);
     }
 
-    endGame(endRequest){
-        return axios.post(`${url}/end`, endRequest);
+    endGame(endRequest, id){
+        return axios.post(`${url}/${id}/end`, endRequest);
     }
 
-    undo(){
-        return axios.post(`${url}/undo`);
+    undo(id){
+        return axios.post(`${url}/${id}/undo`);
     }
    
 }

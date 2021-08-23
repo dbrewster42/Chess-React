@@ -22,12 +22,12 @@ function App() {
   //       })
   //       .catch(error => console.log(error))
   //   }
-  const toggleUndo = () => {
-    setUndo(true);
+  const toggleUndo = (allowUndo) => {
+    setUndo(allowUndo);
   }
 
   const setTheBoard = data => {
-    console.log("app", data);
+    //console.log("app", data);
     setData([...data]);    
   }
 
@@ -40,7 +40,7 @@ function App() {
           <Welcome setTheBoard={setTheBoard} toggleUndo={toggleUndo} />
         </Route>
 
-        <Route exact path="/game" render={() => <Board data={data} setTheBoard={setTheBoard} undo={undo} /> } />
+        <Route exact path={`/game/:gameId`} render={() => <Board data={data} setTheBoard={setTheBoard} undo={undo} /> } />
 
       </Switch>
     </Router>
